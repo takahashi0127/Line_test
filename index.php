@@ -23,10 +23,11 @@ if ($event->type != "message")
 $replyMessage = null;
 // メッセージタイプが文字列の場合
 if ($event->message->type == "text") {
-    //とりあえず今回は少し加工するだけ
-    $replyMessage = "「".$event->message->text."」といいました?";
-} else {
-    $replyMessage = "テキストしかわからない";
+    $replyMessage = $event->message->text;
+}
+//文字列以外は無視
+else {
+    return;
 }
 
 // メッセージ作成
@@ -34,5 +35,6 @@ $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply
 
 // メッセージ送信
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+var_export($response, true);
 error_log(var_export($response,true));
 return;
