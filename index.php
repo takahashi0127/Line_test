@@ -63,6 +63,6 @@ function chat($text) {
         );
     $stream = stream_context_create($options);
     $res = json_decode(file_get_contents($api_url, false, $stream));
-
+    error_log($res->utt);
     return $res->utt;
 }
