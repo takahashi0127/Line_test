@@ -19,13 +19,17 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPI
 // イベントタイプがmessage以外はスルー
 if ($event->type != "message")
     return;
-
 $replyMessage = null;
 // メッセージタイプが文字列の場合
 if ($event->message->type == "text") {
     //$replyMessage = $event->message->text;
     //docomo返信
-    $replyMessage = chat($event->message->text);
+    $res = bot->getProfile($this->userId);
+    if ($response->isSucceeded()) {
+      $userProfile = $res->getJSONDecodedBody();
+      $displayName = $userProfile['displayName'];
+    }
+    $replyMessage = chat($event->message->text, $event->source->userId, $displayName);
 
 }
 //文字列以外は無視
@@ -45,11 +49,11 @@ return;
 
 //ドコモの雑談APIから雑談データを取得
 //From "https://qiita.com/Yuta_Fujiwara/items/281d3e36845b37872a16"
-function chat($text) {
+function chat($text, $userID, $displayName) {
     // docomo chatAPI
     $api_key = getenv('docomoAPIKey');
     $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
-    $req_body = array('utt' => $text);
+    $req_body = array('utt' => $text, 'context' => $userID, 'nickname' => $displayName 'place' => '松江');
 
     $headers = array(
         'Content-Type: application/json; charset=UTF-8',
