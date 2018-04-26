@@ -25,7 +25,7 @@ if ($event->message->type == "text") {
     //$replyMessage = $event->message->text;
     //docomo返信
     $res = $bot->getProfile($event->source->userId);
-    if ($response->isSucceeded()) {
+    if ($res->isSucceeded()) {
       $userProfile = $res->getJSONDecodedBody();
       $displayName = $userProfile['displayName'];
     }
