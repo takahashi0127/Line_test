@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/vendor/autoload.php';
 
 error_log("start");
@@ -23,7 +23,11 @@ if ($event->type != "message")
 $replyMessage = null;
 // メッセージタイプが文字列の場合
 if ($event->message->type == "text") {
-    $replyMessage = $event->message->text;
+    if($event->message->text == "hello"){
+        $replyMessage = "こんにちは";
+    }else{
+        $replyMessage = $event->message->text;
+    }
 }
 //文字列以外は無視
 else {
