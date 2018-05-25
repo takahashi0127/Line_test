@@ -16,6 +16,8 @@ error_log(var_export($event, true));
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LineMessageAPIChannelAccessToken'));
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPIChannelSecret')]);
 
+
+printf("writing1");
 // イベントタイプがmessage以外はスルー
 if ($event->type != "message")
     return;
@@ -23,7 +25,8 @@ if ($event->type != "message")
 $replyMessage = null;
 // メッセージタイプが文字列の場合
 if ($event->message->type == "text") {
-        $replyMessage = $event->message->text;
+    printf("writing2");
+    $replyMessage = $event->message->text;
     }
 }
 //文字列以外は無視
