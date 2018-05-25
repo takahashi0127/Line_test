@@ -27,7 +27,7 @@ if ($event->message->type == "text") {
     if($event->message->text == "ありがとう"){
         $replyMessage = "どういたしまして"
     }
-    else{
+    else if ($event->message->text != "ありがとう"){
     $replyMessage = $event->message->text;
     }
 }
