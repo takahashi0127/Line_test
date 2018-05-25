@@ -25,7 +25,7 @@ $replyMessage = null;
 // メッセージタイプが文字列の場合
 if ($event->message->type == "text") {
     if($event->message->text == "ありがとう"){
-        $replyMessage = "どういたしまして"
+        $replyMessage = "どういたしまして";
     }
     else if ($event->message->text != "ありがとう"){
     $replyMessage = $event->message->text;
