@@ -24,11 +24,11 @@ $replyMessage = null;
 // メッセージタイプが文字列の場合
 if ($event->message->type == "text") {
     if($event->message->text == "hello"){
-        $replyMessage = "こんにちは";
+        $replyMessage == "こんにちは";
     }
 
     }else{
-        $replyMessage = $event->message->text;
+        $replyMessage == $event->message->text;
     }
 }
 //文字列以外は無視
