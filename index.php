@@ -26,8 +26,7 @@ if ($event->message->type == "text") {
     if($event->message->text == "hello"){
         $replyMessage = "こんにちは";
     }
-    eles if($event->message->text == "小鹿"){
-        $replyMessage = "滉人";
+
     }else{
         $replyMessage = $event->message->text;
     }
