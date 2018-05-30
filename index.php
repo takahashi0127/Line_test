@@ -17,6 +17,15 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LineMessageAPI
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPIChannelSecret')]);
 
 
+
+
+//追記部分
+$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
+
+
+
+
 // イベントタイプがmessage以外はスルー
 if ($event->type != "message")
     return;
