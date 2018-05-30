@@ -1,36 +1,78 @@
 ﻿<?php
-// SDKをrequire
-require __DIR__ . '/vendor/autoload.php'; // path to vendor/
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
-$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+require_once __DIR__ . '/vendor/autoload.php';
 
-//ユーザーからのメッセージ取得
-$json_string = file_get_contents('php://input');
-$json_object = json_decode($json_string);
+error_log("start");
+
+// POSTを受け取る
+$postData = file_get_contents('php://input');
+error_log($postData);
+
+// jeson化
+$json = json_decode($postData);
+$events = $json->events;
+error_log(var_export($events[0], true));
+
+// ChannelAccessTokenとChannelSecret設定
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LineMessageAPIChannelAccessToken'));
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPIChannelSecret')]);
+
+
+
+
+//追記部分
+$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+//$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
+
+//foreach ($events as $event) {
+//    if (($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent)) {
+//        $type = $json_object->{"events"}[0]->{"beacon"}->{"type"};
+//        if ($type === "enter") {
+//            $message = "おかえりなさい";
+//        }elseif (($type === "leave")) {
+//            $message = "行ってらっしゃい";
+//        }
+//        $body = <<<EOD {$message}!! EOD;
+//        replyTextMessage($bot, $event->getReplyToken(), $body);
+//        exit;
+//    }
+//}
 
 foreach ($events as $event) {
-    // ビーコン処理
-    if (($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent)) {
-        $type = $json_object->{"events"}[0]->{"beacon"}->{"type"};
-        if ($type === "enter") {
-            $message = "お帰りなさい";
-        } elseif (($type === "leave")) {
-            $message = "行ってらっしゃい";
+    if(!empty($event->beacon)) {
+        $type = $event->beacon->type; //enter or leave
+        if($type == "enter"){
+            $replyMessage = "おかえりなさい";
         }
-        $body = <<<EOD
-{$message}!!
-EOD;
-        replyTextMessage($bot, $event->getReplyToken(), $body);
-        exit;
+        elseif (($type === "leave")) {
+            $replyMessage = "行ってらっしゃい";
+        }
+    }
+    // イベントタイプがmessage以外はスルー
+    elseif ($event->type != "message"){
+        return;
+    }
+    $replyMessage = null;
+    // メッセージタイプが文字列の場合
+    if ($event->message->type == "text") {
+        if($event->message->text == "ありがとう"){
+            $replyMessage = "どういたしまして";
+        }
+        else if ($event->message->text != "ありがとう"){
+            $replyMessage = $event->message->text;
+        }
+    }
+    //文字列以外は無視
+    else {
+        return;
     }
 }
 
-function replyTextMessage($bot, $replyToken, $text) {
-    $response = $bot->replyMessage($replyToken, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text));
-    if (!$response->isSucceeded()) {
-        error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
-    }
-}
-?>
+
+// メッセージ作成
+$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
+
+// メッセージ送信
+$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+var_export($response, true);
+error_log(var_export($response,true));
+return;
