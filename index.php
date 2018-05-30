@@ -20,7 +20,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPI
 
 
 //追記部分
-//$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 //$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
 
 //foreach ($event as $event) {
