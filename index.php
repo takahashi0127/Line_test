@@ -19,10 +19,27 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPI
 
 
 
-//追記部分
+//追記部分//////////////////////////////////////////////////////////////////////////////////////
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
 
+foreach ($event as $event) {
+    if (($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent)) {
+        $type = $json_object->{"events"}[0]->{"beacon"}->{"type"};
+        if ($type === "enter") {
+            $message = "おかえりなさい";
+        }elseif (($type === "leave")) {
+            $message = "行ってらっしゃい";
+        }
+        $body = <<<EOD
+{$message}!!
+EOD;
+        replyTextMessage($bot, $event->getReplyToken(), $body);
+        exit;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
