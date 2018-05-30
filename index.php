@@ -44,8 +44,8 @@ EOD;
 
 
 // イベントタイプがmessage以外はスルー
-if ($event->type != "message")
-    return;
+//if ($event->type != "message")
+//    return;
 
 $replyMessage = null;
 // メッセージタイプが文字列の場合
