@@ -34,7 +34,7 @@ foreach ($event as $event) {
         $body = <<<EOD
 {$message}!!
 EOD;
-        replyTextMessage($bot, $event->getReplyToken(), $body);
+       // replyTextMessage($bot, $event->getReplyToken(), $body);
         exit;
     }
 }
