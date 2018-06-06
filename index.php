@@ -62,14 +62,17 @@ foreach ($events as $event) {
 
             if ($event->message->text == "1"){
                 $replyMessage = "鍵の名前を入力してください";
-                /*if ($event->message->type == "text"){
+                $postData = file_get_contents('php://input');
+                $json = json_decode($postData);
+                $events = $json->events;
+                if ($events->message->type == "text"){
 	    	  $keyname = $event->message->text;
-                  $replyMessage = "OK";
+                  $replyMessage = "$keyname : ok";
                 }
              }
             else{
 		return;
-	    }*/
+	    }
         }
 
     }
