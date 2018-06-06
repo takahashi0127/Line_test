@@ -69,8 +69,8 @@ foreach ($events as $event) {
              }
             else{
 		return;
-	    }
-        }*/
+	    }*/
+        }
 
     }
 
