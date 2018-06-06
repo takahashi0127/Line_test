@@ -26,21 +26,24 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 
 //$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
 
-//foreach ($events as $event) {
-//    if (($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent)) {
-//        $type = $json_object->{"events"}[0]->{"beacon"}->{"type"};
-//        if ($type === "enter") {
-//            $message = "おかえりなさい";
-//        }elseif (($type === "leave")) {
-//            $message = "行ってらっしゃい";
-//        }
-//        $body = <<<EOD {$message}!! EOD;
-//        replyTextMessage($bot, $event->getReplyToken(), $body);
-//        exit;
-//    }
-//}
+/*foreach ($events as $event) {
+    if (($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent)) {
+        $type = $json_object->{"events"}[0]->{"beacon"}->{"type"};
+        if ($type === "enter") {
+            $message = "おかえりなさい";
+        }elseif (($type === "leave")) {
+            $message = "行ってらっしゃい";
+        }
+        $body = <<<EOD {$message}!! EOD;
+        replyTextMessage($bot, $event->getReplyToken(), $body);
+        exit;
+    }
+}*/
 
 foreach ($events as $event) {
+
+
+//////////////ビーコンイベント///////////////////
     if(!empty($event->beacon)) {
         $type = $event->beacon->type; //enter or leave
         if($type == "enter"){
@@ -50,13 +53,16 @@ foreach ($events as $event) {
             $replyMessage = "行ってらっしゃい";
         }
     }
+/////////////////////////////////////////////////
+
+
     // イベントタイプがmessage以外はスルー
     elseif ($event->type != "message"){
         return;
     }
     $replyMessage = null;
     // メッセージタイプが文字列の場合
-    if ($event->message->type == "text") { //テキストメッセージの場合
+    elseif ($event->message->type == "text") {
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始"."\n"."3：施錠状況確認";
 
