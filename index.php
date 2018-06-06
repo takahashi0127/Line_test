@@ -58,10 +58,10 @@ foreach ($events as $event) {
 
 
 
-//イベントタイプがmessage以外はスルー
+/*イベントタイプがmessage以外はスルー
     elseif ($event->type != "message"){
         return;
-    }
+    }*/
 
 
 
@@ -79,24 +79,27 @@ foreach ($events as $event) {
 	    	  $keyname = $event->message->text;
                   $replyMessage = "$keyname : ok";
                 }
-             }
-            else{
-		return;
-	    }*/
-         }
-}
-
-    
-
-        else if ($event->message->text != "ありがとう"){
-            $replyMessage = $event->message->text;
+             }*/
         }
+            else{
+                $replyMessage = $event->message->text;
+		//return;
+	    }
     }
+/////////////////////////////////////////////////
+
+
+    /*else if ($event->message->text != "ありがとう"){
+        $replyMessage = $event->message->text;
+    }*/
+
     //文字列以外は無視
     else {
         return;
     }
-}
+
+
+}//foreach
 
 
 // メッセージ作成
