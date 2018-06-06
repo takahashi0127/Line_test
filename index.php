@@ -71,41 +71,23 @@ foreach ($events as $event) {
     if ($event->message->type == "text") {
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始"."\n"."3：施錠状況確認";
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
-            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-            var_export($response, true);
 
-            if ($event->message->text == "1"){
+            /*if ($event->message->text == "1"){
                 $replyMessage = "鍵の名前を入力してください";
-                $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
-                $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-                var_export($response, true);
 
                 if ($events->message->type == "text"){
 	    	  $keyname = $event->message->text;
                   $replyMessage = "$keyname : ok";
-                  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
-                  $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-                  var_export($response, true);
                 }
                 else{
                     return;
-                }
-            }
-
-            else{
-                $replyMessage = $event->message->text;
-		//return;
-	    }
+                }*/
         }
+
         else{
             $replyMessage = $event->message->text;
             //return;
-	}
-    }
-    else{
-        $replyMessage = $event->message->text;
-        //return;
+        }
     }
 /////////////////////////////////////////////////
 
