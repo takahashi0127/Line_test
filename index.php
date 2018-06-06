@@ -62,13 +62,13 @@ foreach ($events as $event) {
         }
         else if($event->message->text == "1"){
             $replyMessage = "鍵の名前を入力してください";
-            if($event->message->type == "text"){
-		$keyname = $event->message->text;
-                $replyMessage = "$keyname";
-            }
-            else{
-		return;
-	    }
+        //    if($event->message->type == "text"){
+	//	$keyname = $event->message->text;
+        //        $replyMessage = "$keyname";
+        //    }
+        //    else{
+	//	return;
+	//  }
         }
         else if ($event->message->text != "ありがとう"){
             $replyMessage = $event->message->text;
