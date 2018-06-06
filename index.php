@@ -59,22 +59,21 @@ foreach ($events as $event) {
     if ($event->message->type == "text") { //テキストメッセージの場合
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始"."\n"."3：施錠状況確認";
-            $postData = file_get_contents('php://input');
-            $json = json_decode($postData);
-            $events = $json->events;
-            if ($events->message->text == "1"){
+
+             /*if ($event->message->text == "1"){
                 $replyMessage = "鍵の名前を入力してください";
 
-                /*if ($events->message->type == "text"){
+                if ($events->message->type == "text"){
 	    	  $keyname = $event->message->text;
                   $replyMessage = "$keyname : ok";
-                }*/
+                }
              }
             else{
 		return;
 	    }*/
          }
-     }
+}
+
     
 
         else if ($event->message->text != "ありがとう"){
