@@ -44,6 +44,7 @@ foreach ($events as $event) {
 
 
 //////////////ビーコンイベント///////////////////
+
     if(!empty($event->beacon)) {
         $type = $event->beacon->type; //enter or leave
         if($type == "enter"){
@@ -56,12 +57,17 @@ foreach ($events as $event) {
 /////////////////////////////////////////////////
 
 
-    // イベントタイプがmessage以外はスルー
+
+//イベントタイプがmessage以外はスルー
     elseif ($event->type != "message"){
         return;
     }
+
+
+
     $replyMessage = null;
-    // メッセージタイプが文字列の場合
+
+///////メッセージタイプが文字列の場合////////////
     elseif ($event->message->type == "text") {
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始"."\n"."3：施錠状況確認";
