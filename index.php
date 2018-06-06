@@ -58,7 +58,10 @@ foreach ($events as $event) {
     // メッセージタイプが文字列の場合
     if ($event->message->type == "text") {
         if($event->message->text == "ヘルプ"){
-            $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始";
+            $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始"."\n"."3：施錠状況確認";
+        }
+        if($event->message->text == "1"){
+            $replyMessage = "鍵の名前を入力してください→";
         }
         else if ($event->message->text != "ありがとう"){
             $replyMessage = $event->message->text;
