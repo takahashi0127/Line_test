@@ -70,9 +70,9 @@ foreach ($events as $event) {
             else{
 		return;
 	    }*/
-        }
+         }
 
-    }
+    
 
         else if ($event->message->text != "ありがとう"){
             $replyMessage = $event->message->text;
