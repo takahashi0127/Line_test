@@ -43,7 +43,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 foreach ($events as $event) {
 
 
-//////////////ビーコンイベント///////////////////
+//ビーコンイベント
 
     if(!empty($event->beacon)) {
         $type = $event->beacon->type; //enter or leave
@@ -54,7 +54,7 @@ foreach ($events as $event) {
             $replyMessage = "行ってらっしゃい";
         }
     }
-/////////////////////////////////////////////////
+
 
 
 
@@ -68,7 +68,7 @@ foreach ($events as $event) {
     $replyMessage = null;
 
 ///////メッセージタイプが文字列の場合////////////
-    if ($event->message->type == "text") {
+    elseif ($event->message->type == "text") {
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始"."\n"."3：施錠状況確認";
 
