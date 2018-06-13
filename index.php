@@ -48,10 +48,10 @@ foreach ($events as $event) {
     if(!empty($event->beacon)) {
         $type = $event->beacon->type; //enter or leave
         if($type == "enter"){
-            $replyMessage = "おかえりなさい";
+            $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
         }
         else if (($type === "leave")) {
-            $replyMessage = "行ってらっしゃい";
+            $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
         }
     }
 ////////////////////////////////////////////////////////////////////////////
