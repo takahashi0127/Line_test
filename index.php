@@ -88,6 +88,9 @@ foreach ($events as $event) {
             else if ($event->message->text == "3"){
                 $replyMessage = "現在の施錠状況です";
             }
+            else{
+            return;
+            }
         }//if(ヘルプ)
 
         else{
