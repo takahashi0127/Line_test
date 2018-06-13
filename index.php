@@ -74,7 +74,7 @@ foreach ($events as $event) {
         //if ($event->message->text == "ヘルプ"){
             $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
        // }//ifヘルプ
-        else if ($event->message->text == "1"){
+        if ($event->message->text == "1"){
             $replyMessage = "鍵の名前を入力してください";
 
             /*if ($events->message->type == "text"){
