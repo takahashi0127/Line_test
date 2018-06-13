@@ -114,8 +114,8 @@ var_export($response, true);
 error_log(var_export($response,true));
 return;*/
 
-define("LINE_MESSAGING_API_CHANNEL_SECRET", 'your channel secret');
-define("LINE_MESSAGING_API_CHANNEL_TOKEN", 'your channel token');
+define("LINE_MESSAGING_API_CHANNEL_SECRET", 'e959ec94972c6c2ba0909b67aa09e651');
+define("LINE_MESSAGING_API_CHANNEL_TOKEN", '2TVjYMCK0fNA2oni3mSCCjPZL4YSX1qtznghj/2mLzZdXzI7XTIwUzc/kbrK0XhNv/FLa5GmkHcxA0rQrJSW9P8PvPzv/JbWGndMNUDM3NSQ/PU+T5NnyqPkTecbXbJmTvPDjC6yofry5sGA2rnrnQdB04t89/1O/w1cDnyilFU=');
 
 require __DIR__."/../vendor/autoload.php";
 
