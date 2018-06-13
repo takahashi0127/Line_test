@@ -89,7 +89,7 @@ foreach ($events as $event) {
                 $replyMessage = "現在の施錠状況です";
             }
             else{
-            return;
+            $replyMessage = $event->message->text;
             }
         }//if(ヘルプ)
 
