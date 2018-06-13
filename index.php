@@ -1,5 +1,5 @@
 ﻿<?php
-require_once __DIR__ . '/vendor/autoload.php';
+/*require_once __DIR__ . '/vendor/autoload.php';
 
 error_log("start");
 
@@ -112,4 +112,36 @@ $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 var_export($response, true);
 error_log(var_export($response,true));
-return;
+return;*/
+
+
+//以下コピペ
+$accessToken = ACCESS_TOKEN;
+    $json_string = file_get_contents('php://input');
+    $jsonObj = json_decode($json_string);
+    $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};     //ReplyToken取得
+    $userId = $jsonObj->{"events"}[0]->{"source"}->{"userId"};        //userId取得
+    $eventType = $jsonObj->{"events"}[0]->{"type"};  //typeの取得
+    if($eventType == "beacon"){
+      ResponseLineText( $accessToken, $replyToken, "僕との距離が近づいてきました！！" );
+    }
+    function ResponseLineText($accessToken,$replyToken,$text){
+        $response_format_text = [
+          "type" => "text",
+          "text" => $text
+        ];
+        $post_data = [
+           "replyToken" => $replyToken,
+           "messages" => [$response_format_text]
+        ];
+        $ch = curl_init("https://api.line.me/v2/bot/message/reply");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: 
+        application/json; charser=UTF-8','Authorization: Bearer ' . $accessToken));
+        $result = curl_exec($ch);
+        curl_close($ch);
+     }
+
