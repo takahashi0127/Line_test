@@ -1,5 +1,5 @@
 ﻿<?php
-/*require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 error_log("start");
 
@@ -112,34 +112,4 @@ $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 var_export($response, true);
 error_log(var_export($response,true));
-return;*/
-
-define("LINE_MESSAGING_API_CHANNEL_SECRET", 'e959ec94972c6c2ba0909b67aa09e651');
-define("LINE_MESSAGING_API_CHANNEL_TOKEN", '2TVjYMCK0fNA2oni3mSCCjPZL4YSX1qtznghj/2mLzZdXzI7XTIwUzc/kbrK0XhNv/FLa5GmkHcxA0rQrJSW9P8PvPzv/JbWGndMNUDM3NSQ/PU+T5NnyqPkTecbXbJmTvPDjC6yofry5sGA2rnrnQdB04t89/1O/w1cDnyilFU=');
-
-require __DIR__."/../vendor/autoload.php";
-
-$bot = new \LINE\LINEBot(
-    new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN),
-    ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]
-);
-
-$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-$body = file_get_contents("php://input");
-
-$events = $bot->parseEventRequest($body, $signature);
-
-foreach ($events as $event) {
-    if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
-        $reply_token = $event->getReplyToken();
-        $text = $event->getText();
-        $bot->replyText($reply_token, $text);
-/* ================= ここから追記 =============================*/
-    } elseif ($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent) {
-        $reply_token = $event->getReplyToken();
-        $bot->replyText($reply_token, "近くにいますね？");
-/* ================= ここまで追記 =============================*/
-    }
-}
-
-echo "OK";
+return;
