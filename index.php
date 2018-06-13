@@ -71,33 +71,33 @@ foreach ($events as $event) {
     else if ($event->message->type == "text") {
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
+        }//ifヘルプ
+        else if ($event->message->text == "1"){
+            $replyMessage = "鍵の名前を入力してください";
 
-            if ($event->message->text == "1"){
-                $replyMessage = "鍵の名前を入力してください";
-
-                /*if ($events->message->type == "text"){
-	    	  $keyname = $event->message->text;
+            /*if ($events->message->type == "text"){
+	          $keyname = $event->message->text;
                   $replyMessage = "$keyname : ok";
-                }
-                else{
-                    return;*/
-            }
-            else if ($event->message->text == "2"){
-                $replyMessage = "施錠確認を開始します";
-            }
-            else if ($event->message->text == "3"){
-                $replyMessage = "現在の施錠状況です";
-            }
-            else{
-            $replyMessage = $event->message->text;
-            }
-        }//if(ヘルプ)
-
+              }
+              else{
+                  return;*/
+        }//if1
+        else if ($event->message->text == "2"){
+            $replyMessage = "施錠確認を開始します";
+        }//if2
+        else if ($event->message->text == "3"){
+            $replyMessage = "現在の施錠状況です";
+        }//if3
         else{
-            $replyMessage = $event->message->text;
-            //return;
+        $replyMessage = "==エラー==\n数字を入力してください"
         }
-    }
+    }//elseif(text)
+
+    else{
+        $replyMessage = $event->message->text;
+        //return;
+    }//else
+
 /////////////////////////////////////////////////
 
 
@@ -106,9 +106,9 @@ foreach ($events as $event) {
     }*/
 
     //文字列以外は無視
-    else {
+    /*else {
         return;
-    }
+    }*/
 
 
 }//foreach
