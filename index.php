@@ -88,6 +88,7 @@ foreach ($events as $event) {
             else if ($event->message->text == "3"){
                 $replyMessage = "現在の施錠状況です";
             }
+        }//if(ヘルプ)
 
         else{
             $replyMessage = $event->message->text;
@@ -115,6 +116,6 @@ $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply
 
 // メッセージ送信
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-var_export($response, true);
+//var_export($response, true);
 error_log(var_export($response,true));
 return 0;
