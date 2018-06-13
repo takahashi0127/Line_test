@@ -117,4 +117,4 @@ $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 var_export($response, true);
 error_log(var_export($response,true));
-return;
+return 0;
