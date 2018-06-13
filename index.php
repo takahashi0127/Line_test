@@ -65,10 +65,10 @@ foreach ($events as $event) {
 
 
 
-    $replyMessage = null;
+    //$replyMessage = null;
 
 ///////メッセージタイプが文字列の場合////////////
-    if ($event->message->type == "text") {
+    else if ($event->message->type == "text") {
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "1：鍵の登録"."\n"."2：施錠確認開始"."\n"."3：施錠状況確認";
 
