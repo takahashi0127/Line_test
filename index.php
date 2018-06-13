@@ -72,16 +72,21 @@ foreach ($events as $event) {
         if ($event->message->text == "ヘルプ"){
             $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
 
-            /*if ($event->message->text == "1"){
+            if ($event->message->text == "1"){
                 $replyMessage = "鍵の名前を入力してください";
 
-                if ($events->message->type == "text"){
+                /*if ($events->message->type == "text"){
 	    	  $keyname = $event->message->text;
                   $replyMessage = "$keyname : ok";
                 }
                 else{
                     return;
                 }*/
+            else if ($event->message->text == "2"){
+                $replyMessage = "施錠確認を開始します";
+        }
+            else if ($event->message->text == "3"){
+                $replyMessage = "現在の施錠状況です";
         }
 
         else{
