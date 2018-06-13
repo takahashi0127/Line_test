@@ -89,7 +89,7 @@ foreach ($events as $event) {
             $replyMessage = "現在の施錠状況です";
         }//if3
         else{
-        $replyMessage = "==エラー==\n数字を入力してください"
+        $replyMessage = "==エラー==\n数字を入力してください";
         }
     }//elseif(text)
 
