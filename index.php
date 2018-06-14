@@ -40,7 +40,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
     }
 }*/
 
-foreach ($events as $event) {
+//foreach ($events as $event) {
 
 
 /////////////////////////ビーコンイベント///////////////////////////////////
@@ -118,7 +118,7 @@ foreach ($events as $event) {
 
 
 
-}//foreach
+//}//foreach
 
 
 // メッセージ作成
