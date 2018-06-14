@@ -67,19 +67,22 @@ foreach ($events as $event) {
             case 'ヘルプ':
                 $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
 
-                switch ($event->message->text){
-                    case '1':
-                    $replyMessage = "鍵の名前を入力してください";
-                    break;
+                foreach ($events as $event) {
+                    switch ($event->message->text){
 
-                    case '2':
-                    $replyMessage = "施錠確認を開始します";
-                    break;
+                        case '1':
+                        $replyMessage = "鍵の名前を入力してください";
+                        break;
 
-                    case '3':
-                    $replyMessage = "現在の施錠状況です";
-                    break;
-                }
+                        case '2':
+                        $replyMessage = "施錠確認を開始します";
+                        break;
+
+                        case '3':
+                        $replyMessage = "現在の施錠状況です";
+                        break;
+                    }//switch(text)
+                }//foreach
 
             break;
 
