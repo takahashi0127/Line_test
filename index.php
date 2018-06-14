@@ -56,57 +56,48 @@ foreach ($events as $event) {
     }
 ////////////////////////////////////////////////////////////////////////////
 
-    else {
-
-/*イベントタイプがmessage以外はスルー
-    elseif ($event->type != "message"){
-        return;
-    }*/
-
+    else if ($event->message->type == "text"){
 
 
     //$replyMessage = null;
 
 ///////メッセージタイプが文字列の場合////////////
-    switch ($event->message->type == "text") {
+    switch ($event->message->text) {
 
-        case '$event->message->text == "ヘルプ"':
+        case 'ヘルプ':
             $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
 
-        case '$event->message->text == "1"':
+        case '1':
             $replyMessage = "鍵の名前を入力してください";
             break;
 
-        case '$event->message->text == "2"':
+        case '2':
             $replyMessage = "施錠確認を開始します";
             break;
 
-        case '$event->message->text == "3"':
+        case '3':
             $replyMessage = "現在の施錠状況です";
             break;
 
         default:
-        $replyMessage = "==エラー==\n数字を入力してください";
+        $replyMessage = "以下のコマンドのみ使用できます。\n「ヘルプ」";
 
     }//switch
 
 
-    if ($event->message->text != "ヘルプ"){
-        $replyMessage = "以下のコマンドのみ使用できます。\n「ヘルプ」";
+/*    else if ($event->message->text != "ヘルプ"){
+        $replyMessage = $event->message->text;
         //return;
+    }
+*/
+
+//イベントタイプがmessage以外はスルー
+    else if ($event->type != "message"){
+        return;
     }
 
 /////////////////////////////////////////////////
 
-
-    /*else if ($event->message->text != "ありがとう"){
-        $replyMessage = $event->message->text;
-    }*/
-
-    //文字列以外は無視
-    /*else {
-        return;
-    }*/
 
 
 
