@@ -56,23 +56,45 @@ foreach ($events as $event) {
     }
 ////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+/////////////////////////テキストイベント////////////////////////////////////////////////////////////////////////////////
     else if ($event->message->type == "text"){
 
-
     //$replyMessage = null;
+        $text = substr($event->message->text, 0 [, 3]);
+
+
+        if ($text == "登録:"){
+            $testMessage = "ok";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+
+        else{
+            return;
+        }
 
 ///////メッセージタイプが文字列の場合////////////
         switch ($event->message->text){
+
+            case '鍵の登録':
+            $registerMessage = "鍵の名前を入力してください";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
             case 'ヘルプ':
                 $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
                 break;
 
             case '鍵の登録':
-            $registerMessage = "鍵の名前を入力してください";
+            $registerMessage = "先頭に「登録:」と付けて鍵の名前を入力してください";
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-            
+
             break;
 
             case '施錠確認':
@@ -105,13 +127,14 @@ foreach ($events as $event) {
     else {
         return;
     }
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 }//foreach
 
-$response = "end";
+
+
 
 // メッセージ作成
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
@@ -120,4 +143,6 @@ $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply
 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 //var_export($response, true);
 error_log(var_export($response,true));
+
+
 return 0;
