@@ -99,8 +99,6 @@ foreach ($events as $event) {
 
 
 
-
-    }//else
 }//foreach
 
 
