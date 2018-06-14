@@ -67,21 +67,21 @@ foreach ($events as $event) {
 
     //$replyMessage = null;
         $text = $event->message->text;
-        $aymMessage = substr($text, 0, 5);
+        $aymMessage = substr($text, 0, 4);
         $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
         $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
-      /*  if ($start == "登録:"){
-            $testMessage = "ok";
-            $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aaaaMessage);
-            $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
+        if ($aymMessage == "登録:"){
+            $regMessage = "ok";
+            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
+            $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
         }
 
         else{
-            $aaaaMessage = "no";
-            $aaaaMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
-            $response = $bot->replyMessage($event->replyToken, $aaaaMessageBuilder);
-        }*/
+            $regMessage = "no";
+            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
+            $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
+        }
 
 ///////メッセージタイプが文字列の場合////////////
         switch ($event->message->text){
