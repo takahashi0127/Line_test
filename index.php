@@ -56,7 +56,7 @@ foreach ($events as $event) {
     }
 ////////////////////////////////////////////////////////////////////////////
 
-
+    else {
 
 /*イベントタイプがmessage以外はスルー
     elseif ($event->type != "message"){
@@ -109,6 +109,8 @@ foreach ($events as $event) {
     }*/
 
 
+
+    }//else
 }//foreach
 
 
