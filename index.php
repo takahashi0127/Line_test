@@ -92,44 +92,30 @@ foreach ($events as $event) {
                 $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
                 break;
 
-            case '':
-                $helpMessage = "10秒以内に数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
-                $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($helpMessage);
-                $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+            case '鍵の登録':
+            $registerMessage = "鍵の名前を入力してください";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+            break;
 
-                //sleep(10);
-                require_once __DIR__ . '/vendor/autoload.php';
-                $postData = file_get_contents('php://input');
-                $json = json_decode($postData);
-                $helpevents = $json->helpevents;
+            case '施錠確認':
+            $checkMessage = "施錠確認を開始します";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+            break;
 
-                foreach ($helpevents as $event) {
-                    switch ($event->message->text){
+            case '施錠状況':
+            $keyMessage = "現在の施錠状況です";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+            break;
 
-                        case '1':
-                        $registerMessage = "鍵の名前を入力してください";
-                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
-                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-                        break;
+            default:
+            $etcMessage = "";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
-                        case '2':
-                        $checkMessage = "施錠確認を開始します";
-                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
-                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-                        break;
 
-                        case '3':
-                        $keyMessage = "現在の施錠状況です";
-                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
-                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-                        break;
-
-                        default:
-                        $etcMessage = "数字を入力してください";
-                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
-                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
-                    }//switch(text)
-                }//foreach
 
             break;
 
@@ -155,6 +141,7 @@ foreach ($events as $event) {
 
 }//foreach
 
+$response = end;
 
 // メッセージ作成
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
