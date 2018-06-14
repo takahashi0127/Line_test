@@ -85,7 +85,7 @@ foreach ($events as $event) {
     }//switch
 
 
-/*    else if ($event->message->text != "ヘルプ"){
+    else if ($event->message->text != "ヘルプ"){
         $replyMessage = $event->message->text;
         //return;
     }
