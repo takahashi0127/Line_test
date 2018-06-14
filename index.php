@@ -81,7 +81,7 @@ foreach ($events as $event) {
                 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($helpMessage);
                 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
-                sleep(10);
+                //sleep(10);
                 $helppostData = file_get_contents('php://input');
                 $json = json_decode($helppostData);
                 $helpevents = $json->events;
