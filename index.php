@@ -77,10 +77,16 @@ foreach ($events as $event) {
                 break;
 
             case 'ヘルプ':
-                $replyMessage = "10秒以内に数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
-                sleep(10);
+                $helpMessage = "10秒以内に数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
+                $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($helpMessage);
+                $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
-                foreach ($events as $event) {
+                sleep(10);
+                $helppostData = file_get_contents('php://input');
+                $json = json_decode($helppostData);
+                $helpevents = $json->events;
+
+                foreach ($helpevents as $event) {
                     switch ($event->message->text){
 
                         case '1':
