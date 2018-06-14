@@ -67,7 +67,7 @@ foreach ($events as $event) {
 
     //$replyMessage = null;
         $text = $event->message->text;
-        $aymMessage = substr($text, 0, 3);
+        $aymMessage = substr($text, 0, 5);
         $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
         $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
