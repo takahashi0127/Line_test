@@ -91,8 +91,8 @@ foreach ($events as $event) {
                 $replyMessage = "真野";
                 break;
 
-            case 'ひろと':
-                $replyMessage = "小鹿";
+            case 'みなみ':
+                $replyMessage = "パン♡";
                 break;
 
             default:
