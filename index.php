@@ -64,30 +64,6 @@ foreach ($events as $event) {
 ///////メッセージタイプが文字列の場合////////////
         switch ($event->message->text){
 
-            case 'たかせ':
-                $replyMessage = "みおな";
-                break;
-
-            case 'かいせい':
-                $replyMessage = "ななせ";
-                break;
-
-            case 'あゆむ':
-                $replyMessage = "みなみ";
-                break;
-
-            case 'みなみ':
-                $replyMessage = "パン♡";
-                break;
-
-            case 'みおな':
-                $replyMessage = "嫌なヤツ嫌なヤツ嫌なヤツ！";
-                break;
-
-            case 'ななせ':
-                $replyMessage = "告白の2度聞きは、禁止やで♡";
-                break;
-
             case 'ヘルプ':
                 $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
                 break;
@@ -96,6 +72,7 @@ foreach ($events as $event) {
             $registerMessage = "鍵の名前を入力してください";
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+            
             break;
 
             case '施錠確認':
