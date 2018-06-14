@@ -67,10 +67,11 @@ foreach ($events as $event) {
 
     //$replyMessage = null;
         $text = $event->message->text;
-        $start = substr($text, 0, 3);
+        $aymMessage = substr($text, 0, 3);
+        $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
+        $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
-
-        if ($start == "登録:"){
+      /*  if ($start == "登録:"){
             $testMessage = "ok";
             $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aaaaMessage);
             $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
@@ -80,7 +81,7 @@ foreach ($events as $event) {
             $aaaaMessage = "no";
             $aaaaMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
             $response = $bot->replyMessage($event->replyToken, $aaaaMessageBuilder);
-        }
+        }*/
 
 ///////メッセージタイプが文字列の場合////////////
         switch ($event->message->text){
