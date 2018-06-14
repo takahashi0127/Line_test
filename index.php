@@ -65,15 +65,27 @@ foreach ($events as $event) {
         switch ($event->message->text){
 
             case 'たかせ':
-                $replyMessage = "川上";
+                $replyMessage = "みおな";
                 break;
 
             case 'かいせい':
-                $replyMessage = "真野";
+                $replyMessage = "ななせ";
+                break;
+
+            case 'あゆむ':
+                $replyMessage = "みなみ";
                 break;
 
             case 'みなみ':
                 $replyMessage = "パン♡";
+                break;
+
+            case 'みおな':
+                $replyMessage = "嫌なヤツ嫌なヤツ嫌なヤツ！";
+                break;
+
+            case 'ななせ':
+                $replyMessage = "告白の2度聞きは、禁止やで♡";
                 break;
 
             case 'ヘルプ':
