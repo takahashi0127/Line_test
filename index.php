@@ -67,7 +67,7 @@ foreach ($events as $event) {
 
     //$replyMessage = null;
         $text = $event->message->text;
-        $start = echo substr($text, 0 [, 3]);
+        $start = echo substr($text, 0, 3);
 
 
         if ($start == "登録:"){
