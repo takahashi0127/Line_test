@@ -64,8 +64,21 @@ foreach ($events as $event) {
 ///////メッセージタイプが文字列の場合////////////
         switch ($event->message->text){
 
+            case 'たかせ':
+                $replyMessage = "川上";
+                break;
+
+            case 'かいせい':
+                $replyMessage = "真野";
+                break;
+
+            case 'みなみ':
+                $replyMessage = "パン♡";
+                break;
+
             case 'ヘルプ':
-                $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
+                $replyMessage = "10秒以内に数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
+                sleep(10);
 
                 foreach ($events as $event) {
                     switch ($event->message->text){
@@ -88,18 +101,6 @@ foreach ($events as $event) {
                 }//foreach
 
             break;
-
-            case 'たかせ':
-                $replyMessage = "川上";
-                break;
-
-            case 'かいせい':
-                $replyMessage = "真野";
-                break;
-
-            case 'みなみ':
-                $replyMessage = "パン♡";
-                break;
 
             default:
             $replyMessage = "以下のコマンドのみ使用できます。\n「ヘルプ」";
