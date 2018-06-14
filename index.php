@@ -77,7 +77,9 @@ foreach ($events as $event) {
         }
 
         else{
-            return;
+            $testMessage = "ok";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
         }
 
 ///////メッセージタイプが文字列の場合////////////
