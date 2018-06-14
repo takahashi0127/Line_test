@@ -90,19 +90,27 @@ foreach ($events as $event) {
                     switch ($event->message->text){
 
                         case '1':
-                        $replyMessage = "鍵の名前を入力してください";
+                        $registerMessage = "鍵の名前を入力してください";
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
+                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
                         break;
 
                         case '2':
-                        $replyMessage = "施錠確認を開始します";
+                        $checkMessage = "施錠確認を開始します";
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
+                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
                         break;
 
                         case '3':
-                        $replyMessage = "現在の施錠状況です";
+                        $keyMessage = "現在の施錠状況です";
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
+                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
                         break;
 
                         default:
-                        $replyMessage = $event->message->text;
+                        $etcMessage = "数字を入力してください"
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
+                        $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
                     }//switch(text)
                 }//foreach
 
