@@ -123,7 +123,7 @@ foreach ($events as $event) {
 
         }//switch
 
-        }//else
+        }//else(text == reg以外)
     }//elseif(text)
 
 /*    else if ($event->message->text != "ヘルプ"){
