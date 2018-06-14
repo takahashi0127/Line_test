@@ -40,7 +40,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
     }
 }*/
 
-//foreach ($events as $event) {
+foreach ($events as $event) {
 
 
 /////////////////////////ビーコンイベント///////////////////////////////////
@@ -81,6 +81,9 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
                         case '3':
                         $replyMessage = "現在の施錠状況です";
                         break;
+
+                        default:
+                        $replyMessage = $event->message->text;
                     }//switch(text)
                 }//foreach
 
@@ -118,7 +121,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 
 
 
-//}//foreach
+}//foreach
 
 
 // メッセージ作成
