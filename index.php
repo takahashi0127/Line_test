@@ -111,7 +111,9 @@ foreach ($events as $event) {
             break;
 
             default:
-            $replyMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
+            $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
+            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
         }//switch
     }//elseif(text)
@@ -132,7 +134,7 @@ foreach ($events as $event) {
 
 }//foreach
 
-$response = end;
+$response = "end";
 
 // メッセージ作成
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
