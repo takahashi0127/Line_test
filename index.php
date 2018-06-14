@@ -89,6 +89,10 @@ foreach ($events as $event) {
                 break;
 
             case 'ヘルプ':
+                $replyMessage = "以下のコマンドが使用可能です。\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n「施錠確認」:登録された鍵の施錠確認を開始します。\n「施錠状況」:登録された鍵の状態を表示します。";
+                break;
+
+            case '':
                 $helpMessage = "10秒以内に数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
                 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($helpMessage);
                 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
@@ -130,7 +134,7 @@ foreach ($events as $event) {
             break;
 
             default:
-            $replyMessage = "以下のコマンドのみ使用できます。\n「ヘルプ」";
+            $replyMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
 
         }//switch
     }//elseif(text)
