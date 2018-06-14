@@ -68,9 +68,9 @@ foreach ($events as $event) {
     //$replyMessage = null;
         $text = $event->message->text;
         $aymMessage = substr($text, 0, 4);
-        $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
+    /*    $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
         $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
-
+*/
         if ($aymMessage == "reg:"){
             $regMessage = "ok";
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
