@@ -78,10 +78,12 @@ foreach ($events as $event) {
         }
 
         else{
+/*
             $regMessage = "no";
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
-        }
+*/
+        
 
 ///////メッセージタイプが文字列の場合////////////
         switch ($event->message->text){
@@ -96,7 +98,7 @@ foreach ($events as $event) {
                 break;
 
             case '鍵の登録':
-            $registerMessage = "先頭に「登録:」と付けて鍵の名前を入力してください";
+            $registerMessage = "先頭に「reg:」と付けて鍵の名前を入力してください";
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
@@ -120,6 +122,8 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
         }//switch
+
+        }//else
     }//elseif(text)
 
 /*    else if ($event->message->text != "ヘルプ"){
