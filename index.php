@@ -92,10 +92,9 @@ foreach ($events as $event) {
 
 
 //イベントタイプがmessage以外はスルー
-    else if ($event->type != "message"){
+    else{
         return;
     }
-*/
 /////////////////////////////////////////////////
 
 
