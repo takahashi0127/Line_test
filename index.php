@@ -68,10 +68,13 @@ foreach ($events as $event) {
     //$replyMessage = null;
 
 ///////メッセージタイプが文字列の場合////////////
-    switch ($event->message->text == "ヘルプ") {
+    switch ($event->message->type == "text") {
+
+        case '$event->message->text == "ヘルプ"':
+            $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
 
         case '$event->message->text == "1"':
-            $replyMessage = "数字を入力してください\n1：鍵の登録\n2：施錠確認開始\n3：施錠状況確認";
+            $replyMessage = "鍵の名前を入力してください";
             break;
 
         case '$event->message->text == "2"':
@@ -89,7 +92,7 @@ foreach ($events as $event) {
 
 
     if ($event->message->text != "ヘルプ"){
-        $replyMessage = $event->message->text;
+        $replyMessage = "以下のコマンドのみ使用できます。\n「ヘルプ」";
         //return;
     }
 
