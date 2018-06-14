@@ -80,6 +80,7 @@ foreach ($events as $event) {
             $testMessage = "ok";
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+            return;
         }
 
 ///////メッセージタイプが文字列の場合////////////
