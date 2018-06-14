@@ -71,7 +71,7 @@ foreach ($events as $event) {
         $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
         $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
-        if ($aymMessage == "登録:"){
+        if ($aymMessage == "reg:"){
             $regMessage = "ok";
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
