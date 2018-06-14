@@ -1,6 +1,6 @@
 ﻿<?php
 require_once __DIR__ . '/vendor/autoload.php';
-a
+
 error_log("start");
 
 // POSTを受け取る
