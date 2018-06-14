@@ -66,10 +66,11 @@ foreach ($events as $event) {
     else if ($event->message->type == "text"){
 
     //$replyMessage = null;
-        $text = substr($event->message->text, 0 [, 3]);
+        $text = $event->message->text;
+        $start = substr($text, 0 [, 3]);
 
 
-        if ($text == "登録:"){
+        if ($start == "登録:"){
             $testMessage = "ok";
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
             $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
