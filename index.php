@@ -72,14 +72,14 @@ foreach ($events as $event) {
 
         if ($start == "登録:"){
             $testMessage = "ok";
-            $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+            $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aaaaMessage);
             $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
         }
 
         else{
-            $testMessage = "no";
-            $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
-            $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
+            $aaaaMessage = "no";
+            $aaaaMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+            $response = $bot->replyMessage($event->replyToken, $aaaaMessageBuilder);
             return;
         }
 
