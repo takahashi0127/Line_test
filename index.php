@@ -82,9 +82,9 @@ foreach ($events as $event) {
                 $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
                 //sleep(10);
-                $helppostData = file_get_contents('php://input');
-                $json = json_decode($helppostData);
-                $helpevents = $json->events;
+                $postData = file_get_contents('php://input');
+                $json = json_decode($postData);
+                $helpevents = $json->helpevents;
 
                 foreach ($helpevents as $event) {
                     switch ($event->message->text){
