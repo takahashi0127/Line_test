@@ -108,7 +108,7 @@ foreach ($events as $event) {
                         break;
 
                         default:
-                        $etcMessage = "数字を入力してください"
+                        $etcMessage = "数字を入力してください";
                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
                         $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
                     }//switch(text)
