@@ -91,6 +91,7 @@ foreach ($events as $event) {
         }//if3
         else{
         $replyMessage = "==エラー==\n数字を入力してください";
+        return;
         }
     }//elseif(text)
 
