@@ -47,15 +47,15 @@ foreach ($events as $event) {
   //  $beaconevent = $event->beacon->type; //enter or leave
 
     if (!empty($event->beacon)) {
-        $beaconevent = $event->beacon->type; //enter or leave
+        $text = $event->beacon->type; //enter or leave
 
 
-        if ($beaconevent === "enter"){
+        if ($text == "enter"){
             $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
-        else if ($beaconevent === "leave") {
+        else if ($text === "leave") {
             $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
