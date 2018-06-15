@@ -42,7 +42,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 
 foreach ($events as $event) {
 
-file_put_contents("keyname.txt", "あいうえお");
+var_dump( file_put_contents("keyname.txt", "あいうえお") );
 /////////////////////////ビーコンイベント///////////////////////////////////
   //  $beaconevent = $event->beacon->type; //enter or leave
 
