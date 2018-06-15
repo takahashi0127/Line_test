@@ -74,8 +74,9 @@ foreach ($events as $event) {
     else if ($event->message->type == "text"){
 
     //$replyMessage = null;
-        $text = $event->message->text;
-        $aymMessage = substr($text, 0, 4);
+     //   $text = $event->message->text;
+        $replyMessage = $event->message->text;
+     /*   $aymMessage = substr($text, 0, 4);
 //        $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
 //        $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
@@ -86,11 +87,11 @@ foreach ($events as $event) {
         }
 
         else{
-/*
-            $regMessage = "no";
-            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
-            $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
-*/
+            
+
+//            $regMessage = "no";
+//            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
+//            $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
         
 
 ///////メッセージタイプが文字列の場合////////////
@@ -125,7 +126,7 @@ foreach ($events as $event) {
 
         }//switch
 
-        }//else(text == reg以外)
+        }//else(text == reg以外)*/
     }//elseif(text)
 
 /*    else if ($event->message->text != "ヘルプ"){
