@@ -80,7 +80,7 @@ foreach ($events as $event) {
  //       $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
  //       $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
-        if ($aymMessage == "reg:"){
+/*        if ($aymMessage == "reg:"){
             $regMessage = "ok";
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
@@ -89,7 +89,7 @@ foreach ($events as $event) {
         else{
             return;
         }
-            
+*/            
 
 //            $regMessage = "no";
 //            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
@@ -97,7 +97,7 @@ foreach ($events as $event) {
         
 
 ///////メッセージタイプが文字列の場合////////////
-        switch ($event->message->text){
+        switch ($text){
 
             case 'ヘルプ':
             $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
