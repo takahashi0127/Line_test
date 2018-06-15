@@ -45,7 +45,7 @@ foreach ($events as $event) {
 
 /////////////////////////ビーコンイベント///////////////////////////////////
 
-    if(!empty($event->beacon)) {
+    if (!empty($event->beacon)) {
         $type = $event->beacon->type; //enter or leave
         if($type == "enter"){
             $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
