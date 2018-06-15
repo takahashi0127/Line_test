@@ -44,10 +44,10 @@ foreach ($events as $event) {
 
 
 /////////////////////////ビーコンイベント///////////////////////////////////
-    $beaconevent = $event->beacon->type; //enter or leave
+  //  $beaconevent = $event->beacon->type; //enter or leave
 
     if (!empty($event->beacon)) {
-        $type = $event->beacon->type; //enter or leave
+        $beaconevent = $event->beacon->type; //enter or leave
 
 
         if ($beaconevent === "enter"){
@@ -55,7 +55,7 @@ foreach ($events as $event) {
             $beaconMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($beaconMessage);
             $response = $bot->replyMessage($event->replyToken, $beaconMessageBuilder);
         }
-        else if (($beaconevent === "leave")) {
+        else if ($beaconevent === "leave") {
             $beaconMessage = "行ってらっしゃい\n鍵は閉めましたか？";
             $beaconMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($beaconMessage);
             $response = $bot->replyMessage($event->replyToken, $beaconMessageBuilder);
