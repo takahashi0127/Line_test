@@ -127,7 +127,7 @@ foreach ($events as $event) {
                 $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
                 $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
       //          file_put_contents($filename, "aaa");
-                $data = "aaa"//file_put_contents($filename);
+                $data = "aaa";//file_put_contents($filename);
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
             }
