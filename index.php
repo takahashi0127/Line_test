@@ -123,9 +123,9 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
-                $testMessage = "書き込み可能";
-                $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
-                $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
+      //          $testMessage = "書き込み可能";
+        //        $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+          //      $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
       //          file_put_contents($filename, "aaa");
                 $data = "aaa";//file_put_contents($filename);
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
