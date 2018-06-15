@@ -85,7 +85,7 @@ foreach ($events as $event) {
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
  //           file_put_contents("keyname.txt", "$regMessage");
-            $fp = fopen('keyname.txt', 'w');
+            $fp = fopen('/master/keyname.txt', 'w');
             fwrite($fp, $regMessage);
             fclose($fp);
         }
