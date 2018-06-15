@@ -128,7 +128,7 @@ foreach ($events as $event) {
           //      $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
                 file_put_contents($filename, "aaa");
                 if (!empty($filename)){
-                $data = file_put_contents($filename);
+                $data = "中身ある";
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
                 }else{
