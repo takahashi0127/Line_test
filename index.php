@@ -123,12 +123,12 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
-                $testMessage = "現在の施錠状況です";
+                $testMessage = "書き込み可能";
                 $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
                 $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
             }
             else{
-                $testMessage = "現在の施錠状況です";
+                $testMessage = "書き込み不能";
                 $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
                 $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             }
