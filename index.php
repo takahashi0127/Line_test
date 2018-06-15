@@ -48,12 +48,12 @@ foreach ($events as $event) {
     if (!empty($event->beacon)) {
         $type = $event->beacon->type; //enter or leave
 
-        if($type == "enter"){
+        if ($type == "enter"){
             $beaconMessage = "おかえりなさい\n戸締りの確認をしましょう";
             $beaconMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($beaconMessage);
             $response = $bot->replyMessage($event->replyToken, $beaconMessageBuilder);
         }
-        else {//if (($type == "leave")) {
+        else if ($type == "leave") {
             $beaconMessage = "行ってらっしゃい\n鍵は閉めましたか？";
             $beaconMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($beaconMessage);
             $response = $bot->replyMessage($event->replyToken, $beaconMessageBuilder);
@@ -73,9 +73,9 @@ foreach ($events as $event) {
     //$replyMessage = null;
         $text = $event->message->text;
         $aymMessage = substr($text, 0, 4);
-    /*    $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
-        $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
-*/
+//        $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
+//        $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
+
         if ($aymMessage == "reg:"){
             $regMessage = "ok";
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
