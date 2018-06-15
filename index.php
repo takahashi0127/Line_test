@@ -43,7 +43,7 @@ $sample = "aaa";
 
 foreach ($events as $event) {
 
-var_dump( file_put_contents($filename, $sample) );
+//var_dump( file_put_contents($filename, $sample) );
 /////////////////////////ビーコンイベント///////////////////////////////////
   //  $beaconevent = $event->beacon->type; //enter or leave
 
@@ -119,6 +119,19 @@ var_dump( file_put_contents($filename, $sample) );
             $keyMessage = "現在の施錠状況です";
             $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
+            break;
+
+            case 'test':
+            if (is_writable($filename)) {
+                $testMessage = "現在の施錠状況です";
+                $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+                $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
+            }
+            else{
+                $testMessage = "現在の施錠状況です";
+                $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+                $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
+            }
             break;
 
             default:
