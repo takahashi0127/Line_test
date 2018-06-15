@@ -50,7 +50,7 @@ foreach ($events as $event) {
         if($type == "enter"){
             $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
         }
-        else if (($type == "leave")) {
+        else {//if (($type == "leave")) {
             $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
         }
     }
