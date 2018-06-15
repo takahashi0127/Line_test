@@ -47,15 +47,15 @@ foreach ($events as $event) {
   //  $beaconevent = $event->beacon->type; //enter or leave
 
     if (!empty($event->beacon)) {
-        $text = $event->beacon->type; //enter or leave
+        $type = $event->beacon->type; //enter or leave
 
 
-        if ($text == "enter"){
+        if ($type == "enter"){
             $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
-        else if ($text === "leave") {
+        else if ($type === "leave") {
             $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
@@ -74,11 +74,11 @@ foreach ($events as $event) {
     else if ($event->message->type == "text"){
 
     //$replyMessage = null;
-     //   $text = $event->message->text;
-        $replyMessage = $event->message->text;
-     /*   $aymMessage = substr($text, 0, 4);
-//        $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
-//        $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
+        $text = $event->message->text;
+     //   $replyMessage = $event->message->text;
+        $aymMessage = substr($text, 0, 4);
+ //       $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
+ //       $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
         if ($aymMessage == "reg:"){
             $regMessage = "ok";
@@ -87,6 +87,8 @@ foreach ($events as $event) {
         }
 
         else{
+            return;
+        }
             
 
 //            $regMessage = "no";
@@ -126,7 +128,7 @@ foreach ($events as $event) {
 
         }//switch
 
-        }//else(text == reg以外)*/
+    //    }//else(text == reg以外)
     }//elseif(text)
 
 /*    else if ($event->message->text != "ヘルプ"){
