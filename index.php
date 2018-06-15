@@ -86,7 +86,7 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
  //           file_put_contents("keyname.txt", "$regMessage");
             $fp = fopen('keyname.txt', 'w');
-            fwrite($fp, '$regMessage');
+            fwrite($fp, $regMessage);
             fclose($fp);
         }
 
