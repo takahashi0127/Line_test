@@ -21,7 +21,8 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPI
 
 //追記部分
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-
+$filename = "keyname.txt";
+$sample = "aaa";
 
 
 //$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
@@ -42,7 +43,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 
 foreach ($events as $event) {
 
-var_dump( file_put_contents("keyname.txt", "あいうえお") );
+var_dump( file_put_contents($filename, $sample) );
 /////////////////////////ビーコンイベント///////////////////////////////////
   //  $beaconevent = $event->beacon->type; //enter or leave
 
