@@ -55,7 +55,7 @@ foreach ($events as $event) {
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
-        else if ($type === "leave") {
+        elseif (($type === "leave")) {
             $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
@@ -80,16 +80,14 @@ foreach ($events as $event) {
  //       $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
  //       $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
-/*        if ($aymMessage == "reg:"){
+       if ($aymMessage == "reg:"){
             $regMessage = "ok";
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
         }
 
         else{
-            return;
-        }
-*/            
+            
 
 //            $regMessage = "no";
 //            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
@@ -128,7 +126,7 @@ foreach ($events as $event) {
 
         }//switch
 
-    //    }//else(text == reg以外)
+        }//else(text == reg以外)
     }//elseif(text)
 
 /*    else if ($event->message->text != "ヘルプ"){
