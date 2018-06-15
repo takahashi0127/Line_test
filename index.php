@@ -50,7 +50,7 @@ foreach ($events as $event) {
         if($type == "enter"){
             $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
         }
-        else if (($type === "leave")) {
+        else if (($type == "leave")) {
             $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
         }
     }
@@ -87,11 +87,6 @@ foreach ($events as $event) {
 
 ///////メッセージタイプが文字列の場合////////////
         switch ($event->message->text){
-
-            case '鍵の登録':
-            $registerMessage = "鍵の名前を入力してください";
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
-            $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 
             case 'ヘルプ':
                 $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
