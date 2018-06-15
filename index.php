@@ -51,14 +51,14 @@ foreach ($events as $event) {
 
 
         if ($beaconevent === "enter"){
-            $beaconMessage = "おかえりなさい\n戸締りの確認をしましょう";
-            $beaconMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($beaconMessage);
-            $response = $bot->replyMessage($event->replyToken, $beaconMessageBuilder);
+            $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
+    //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
+    //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
         else if ($beaconevent === "leave") {
-            $beaconMessage = "行ってらっしゃい\n鍵は閉めましたか？";
-            $beaconMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($beaconMessage);
-            $response = $bot->replyMessage($event->replyToken, $beaconMessageBuilder);
+            $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
+    //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
+    //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
 
     }
