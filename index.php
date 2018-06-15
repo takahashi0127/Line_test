@@ -42,7 +42,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 
 foreach ($events as $event) {
 
-
+file_put_contents("keyname.txt", "あいうえお");
 /////////////////////////ビーコンイベント///////////////////////////////////
   //  $beaconevent = $event->beacon->type; //enter or leave
 
@@ -84,7 +84,7 @@ foreach ($events as $event) {
             $regMessage = substr($text, 4);
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
-            file_put_contents("keyname.php", $regMessage);
+      //      file_put_contents("keyname.php", $regMessage);
         }
 
         else{
