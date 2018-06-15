@@ -82,9 +82,9 @@ foreach ($events as $event) {
 
        if ($aymMessage == "reg:"){
             $regMessage = substr($text, 4);
- //           $regMessage = "ok";
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
+            file_put_contents("keyname.php", "$regMessage", FILE_APPEND);
         }
 
         else{
