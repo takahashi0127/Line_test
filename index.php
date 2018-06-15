@@ -126,7 +126,7 @@ foreach ($events as $event) {
                 $testMessage = "書き込み可能";
                 $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
                 $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
-                file_put_contents($filename, $regMessage);
+                file_put_contents($filename, "aaa");
                 $data = file_put_contents($filename);
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
