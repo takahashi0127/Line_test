@@ -1,6 +1,6 @@
 ﻿<?php
-require_once __DIR__ . '/vendor/autoload.php';
-//require_once __DIR__ . '/keyname.php';
+//require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/keyname.php';
 
 error_log("start");
 
@@ -101,10 +101,7 @@ foreach ($events as $event) {
         switch ($text){
 
             case 'ヘルプ':
-            //$replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
-                $data = require_once __DIR__ . '/keyname.php';
-                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
-                $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+            $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
             break;
 
             case '鍵の登録':
@@ -127,7 +124,10 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
-                include 'keyname.php';
+                $dataMessage = "keyname1";
+                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+                $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+//                include 'keyname.php';
 //                file_put_contents($filename, "aaa");
  //               if (!empty($filename)){
 
@@ -140,7 +140,7 @@ foreach ($events as $event) {
             else{
                 $testMessage = "書き込み不能";
                 $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
-                $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
+                $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
             }
             break;
 
