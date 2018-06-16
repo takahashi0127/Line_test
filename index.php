@@ -1,5 +1,6 @@
 ﻿<?php
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . 'keyname.php';
 
 error_log("start");
 
@@ -123,7 +124,7 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
-                include 'keyname.php';
+//                include 'keyname.php';
 //                file_put_contents($filename, "aaa");
  //               if (!empty($filename)){
                 $data = $keyname1;
