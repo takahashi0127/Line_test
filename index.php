@@ -126,8 +126,8 @@ foreach ($events as $event) {
                 include 'keyname.php';
 //                file_put_contents($filename, "aaa");
  //               if (!empty($filename)){
- //               $data = file_put_contents($filename);
-                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyname1);
+                $data = $keyname1;
+                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
 //                }else{
 //                $else = "からっぺ";
