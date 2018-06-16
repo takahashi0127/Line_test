@@ -17,7 +17,7 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LineMessageAPI
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPIChannelSecret')]);
 
 
-
+include 'keyname.txt';
 
 //追記部分
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
@@ -128,7 +128,7 @@ foreach ($events as $event) {
           //      $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
                 file_put_contents($filename, "aaa");
                 if (!empty($filename)){
-                $data = "中身ある";
+                $data = file_put_contents($filename);
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
                 }else{
