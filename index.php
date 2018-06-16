@@ -123,8 +123,8 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
-                require_once '/keyname.php';
-                $dataMessage = $keyname1;
+                
+                $dataMessage = require_once '/keyname.php';
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
 //                include 'keyname.php';
