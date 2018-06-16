@@ -101,7 +101,10 @@ foreach ($events as $event) {
         switch ($text){
 
             case 'ヘルプ':
-            $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
+            //$replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
+                $data = require_once __DIR__ . '/keyname.php';
+                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
+                $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
             break;
 
             case '鍵の登録':
@@ -124,12 +127,10 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
-//                include 'keyname.php';
+                include 'keyname.php';
 //                file_put_contents($filename, "aaa");
  //               if (!empty($filename)){
-                $data = require_once __DIR__ . '/keyname.php';
-                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
-                $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+
 //                }else{
 //                $else = "からっぺ";
  //               $elseMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($else);
