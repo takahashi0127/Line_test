@@ -124,7 +124,7 @@ foreach ($events as $event) {
             case 'test':
             if (is_writable($filename)) {
 //                file_put_contents($filename, "aaa");
-                if (!empty($filename)){
+ //               if (!empty($filename)){
  //               $data = file_put_contents($filename);
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyname1);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
