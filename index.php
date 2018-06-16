@@ -17,13 +17,13 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LineMessageAPI
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPIChannelSecret')]);
 
 
-include 'keyname.txt';
+
 
 //追記部分
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $filename = "keyname.txt";
 $sample = "aaa";
-
+include 'keyname.php';
 
 //$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
 
@@ -123,13 +123,10 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
-      //          $testMessage = "書き込み可能";
-        //        $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
-          //      $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
-                file_put_contents($filename, "aaa");
+//                file_put_contents($filename, "aaa");
                 if (!empty($filename)){
-                $data = file_put_contents($filename);
-                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
+ //               $data = file_put_contents($filename);
+                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyname1);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
                 }else{
                 $else = "からっぺ";
