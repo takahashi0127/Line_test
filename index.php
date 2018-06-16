@@ -128,11 +128,11 @@ foreach ($events as $event) {
  //               $data = file_put_contents($filename);
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyname1);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
-                }else{
-                $else = "からっぺ";
-                $elseMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($else);
-                $response = $bot->replyMessage($event->replyToken, $elseMessageBuilder);
-                }
+//                }else{
+//                $else = "からっぺ";
+ //               $elseMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($else);
+//                $response = $bot->replyMessage($event->replyToken, $elseMessageBuilder);
+
             }
             else{
                 $testMessage = "書き込み不能";
