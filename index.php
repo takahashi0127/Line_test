@@ -1,6 +1,5 @@
 ﻿<?php
-//require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/keyname.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 error_log("start");
 
@@ -124,6 +123,7 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
+                require_once __DIR__ . '/keyname.php';
                 $dataMessage = "keyname1";
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
