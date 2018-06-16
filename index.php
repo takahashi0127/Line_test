@@ -23,7 +23,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPI
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $filename = "keyname.txt";
 $sample = "aaa";
-include 'keyname.php';
+
 
 //$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
 
@@ -123,6 +123,7 @@ foreach ($events as $event) {
 
             case 'test':
             if (is_writable($filename)) {
+                include 'keyname.php';
 //                file_put_contents($filename, "aaa");
  //               if (!empty($filename)){
  //               $data = file_put_contents($filename);
