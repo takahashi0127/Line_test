@@ -124,7 +124,7 @@ foreach ($events as $event) {
             case 'test':
             if (is_writable($filename)) {
                 require_once __DIR__ . '/keyname.php';
-                $dataMessage = "keyname1";
+                $dataMessage = "$keyname1";
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
 //                include 'keyname.php';
