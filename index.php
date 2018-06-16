@@ -1,6 +1,6 @@
 ﻿<?php
-//require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . 'keyname.php';
+require_once __DIR__ . '/vendor/autoload.php';
+//require_once __DIR__ . '/keyname.php';
 
 error_log("start");
 
@@ -127,7 +127,7 @@ foreach ($events as $event) {
 //                include 'keyname.php';
 //                file_put_contents($filename, "aaa");
  //               if (!empty($filename)){
-                $data = $keyname1;
+                $data = require_once __DIR__ . '/keyname.php';
                 $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($data);
                 $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
 //                }else{
