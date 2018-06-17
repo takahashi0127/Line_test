@@ -122,26 +122,12 @@ foreach ($events as $event) {
             break;
 
             case 'test':
-            if (is_writable($filename)) {
                 
-                $dataMessage = require_once __DIR__ . '/keyname.php';
-                $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
-                $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
-//                include 'keyname.php';
-//                file_put_contents($filename, "aaa");
- //               if (!empty($filename)){
-
-//                }else{
-//                $else = "からっぺ";
- //               $elseMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($else);
-//                $response = $bot->replyMessage($event->replyToken, $elseMessageBuilder);
-
-            }
-            else{
-                $testMessage = "書き込み不能";
-                $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
-                $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
-            }
+            $dataMessage = require_once __DIR__ . '/keyname.php';
+            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+//          include 'keyname.php';
+//          file_put_contents($filename, "aaa");
             break;
 
             default:
