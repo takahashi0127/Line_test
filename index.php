@@ -112,7 +112,7 @@ foreach ($events as $event) {
             $file = 'keyname3.txt';
             file_put_contents($file, $keyname3);
             $data = file_get_contents('keyname3.txt', true);
-            $dataMessage = "'$data'を「鍵3として」登録しました";
+            $dataMessage = "'$data'を「鍵3」として登録しました";
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
         }
@@ -155,9 +155,12 @@ foreach ($events as $event) {
             $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             break;
-
-            //case 'test':
-            //break;
+            $testMessage = "$keyname1"."$keyname2"."$keyname3";
+            $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
+            $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
+            case 'test':
+            
+            break;
 
             default:
             $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
