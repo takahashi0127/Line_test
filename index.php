@@ -167,6 +167,12 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             break;
 
+            case 'みなみ':
+            $message = array('type'               => 'image',
+                             'originalContentUrl' => 'https://pics.prcm.jp/yunosuke5522/27820061/jpeg/27820061.jpeg',
+                             'previewImageUrl'    => 'https://www.bing.com/images/search?view=detailV2&ccid=NbC3oKeN&id=6A8E54647562227D2285B814AFD68AD49C3D611A&thid=OIP.NbC3oKeNt9bv8Y-bJrsLcQHaJj&mediaurl=http%3a%2f%2fpic.prepics-cdn.com%2fyunosuke5522%2f27820061.jpeg&exph=1163&expw=902&q=%e6%98%9f%e9%87%8e%e3%81%bf%e3%81%aa%e3%81%bf&simid=608018348973557109&selectedIndex=6&ajaxhist=0');
+            break;
+
 /*            case 'test':
             $data1 = file_get_contents('keyname1.txt', true);
             $data2 = file_get_contents('keyname2.txt', true);
