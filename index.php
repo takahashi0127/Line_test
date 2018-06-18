@@ -139,7 +139,7 @@ foreach ($events as $event) {
             break;
 
             case '鍵の確認':
-            $checkMessage = "現在以下の鍵が登録されています\n鍵1:$keyname1\n鍵2:keyname2\n鍵3:keyname3";
+            $checkMessage = "現在以下の鍵が登録されています\n鍵1:'$keyname1'\n鍵2:'$keyname2'\n鍵3:'$keyname3'";
             $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
             $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
             break;
