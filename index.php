@@ -156,10 +156,9 @@ foreach ($events as $event) {
                 $no_post = new PostbackTemplateActionBuilder("解錠", "0");		//「いいえ」ボタン
                 $confirm = new ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);	//confirmテンプレ作成
                 $confirm_message = new TemplateMessageBuilder("施錠確認", $confirm);	//confirmメッセージ作成
-                $message = new MultiMessageBuilder();
-                $message->add($confirm_message);
+                $message = new MultiMessageBuilder($confirm_message);
 
-                $res = $bot->replyMessage($event->replyToken, $message);
+                $response = $bot->replyMessage($event->replyToken, $message);
             break;
 
             case '施錠状況':
