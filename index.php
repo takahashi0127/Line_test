@@ -82,9 +82,17 @@ foreach ($events as $event) {
  //       $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
        if ($aymMessage == "reg:"){
-            $regMessage = substr($text, 4);
+            $keyname = substr($text, 4);
+            $regMessage = "$keynameが登録されました"
             $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
             $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
+            $file = 'keyname.txt';
+            $current = file_get_contents($file);
+            $current .= "$keyname";
+            file_put_contents($file, $current);
+            $dataMessage = file_get_contents('./keyname.txt', true);
+            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
       //      file_put_contents("keyname.php", $regMessage);
         }
 
