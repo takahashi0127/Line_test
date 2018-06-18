@@ -106,16 +106,7 @@ foreach ($events as $event) {
         }
 
         else if ($aymMessage == "reg3:"){
-            $keyname2 = substr($text, 5);
-            $file = 'keyname3.txt';
-            file_put_contents($file, $keyname3, FILE_APPEND | LOCK_EX);
-            $dataMessage = file_get_contents('keyname3.txt', true);
-            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
-            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
-        }
-
-        else if ($aymMessage == "reg3:"){
-            $keyname3 = substr($text, 4);
+            $keyname3 = substr($text, 5);
             $file = 'keyname3.txt';
             file_put_contents($file, $keyname3, FILE_APPEND | LOCK_EX);
             $dataMessage = file_get_contents('keyname3.txt', true);
