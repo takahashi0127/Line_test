@@ -77,23 +77,41 @@ foreach ($events as $event) {
     //$replyMessage = null;
         $text = $event->message->text;
      //   $replyMessage = $event->message->text;
-        $aymMessage = substr($text, 0, 4);
+        $aymMessage = substr($text, 0, 5);
  //       $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
  //       $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
-       if ($aymMessage == "reg:"){
-            $keyname = substr($text, 4);
+       if ($aymMessage == "reg1:"){
+            $keyname1 = substr($text, 4);
     //        $regMessage = "$keynameが登録されました"
     //        $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
      //       $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
-            $file = 'keyname.txt';
+            $file = 'keyname1.txt';
             //$current = file_get_contents($file);
             //$current .= "$keyname";
-            var_dump(file_put_contents($file, $keyname, FILE_APPEND | LOCK_EX));
+            file_put_contents($file, $keyname1, FILE_APPEND | LOCK_EX);
             $dataMessage = file_get_contents('keyname.txt', true);
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
       //      file_put_contents("keyname.php", $regMessage);
+        }
+
+        else if ($aymMessage == "reg2:"){
+            $keyname2 = substr($text, 4);
+            $file = 'keyname2.txt';
+            file_put_contents($file, $keyname2, FILE_APPEND | LOCK_EX);
+            $dataMessage = file_get_contents('keyname2.txt', true);
+            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+        }
+
+        else if ($aymMessage == "reg3:"){
+            $keyname3 = substr($text, 4);
+            $file = 'keyname3.txt';
+            file_put_contents($file, $keyname3, FILE_APPEND | LOCK_EX);
+            $dataMessage = file_get_contents('keyname3.txt', true);
+            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
         }
 
         else{
