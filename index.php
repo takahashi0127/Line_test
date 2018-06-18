@@ -155,11 +155,11 @@ foreach ($events as $event) {
             $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             break;
+
+            case 'test':
             $testMessage = "$keyname1"."$keyname2"."$keyname3";
             $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
             $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
-            case 'test':
-            
             break;
 
             default:
