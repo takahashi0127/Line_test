@@ -122,8 +122,8 @@ foreach ($events as $event) {
             break;
 
             case 'test':
-            $file = 'hiroki.txt';
-            $current = file_put_contents($file);
+            $file = 'keyname.txt';
+            $current = file_get_contents($file);
             $current .= "kawanaka";
             $data = file_put_contents($file, $current);
             $dataMessage = file_get_contents($current);
