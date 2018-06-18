@@ -157,7 +157,10 @@ foreach ($events as $event) {
             break;
 
             case 'test':
-            $testMessage = "$keyname1"."$keyname2"."$keyname3";
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $testMessage = "$data1"."data2"."$data3";
             $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
             $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
             break;
