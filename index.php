@@ -124,7 +124,7 @@ foreach ($events as $event) {
             case 'test':
             $file = 'keyname.txt';
             $current = file_get_contents($file);
-            //$current .= "kawanaka";
+            $current .= "kawanaka";
             file_put_contents($file, $current);
             $dataMessage = file_get_contents('./keyname.txt', true);
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
