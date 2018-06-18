@@ -83,9 +83,9 @@ foreach ($events as $event) {
 
        if ($aymMessage == "reg:"){
             $keyname = substr($text, 4);
-            $regMessage = "$keynameが登録されました"
-            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
-            $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
+    //        $regMessage = "$keynameが登録されました"
+    //        $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
+     //       $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
             $file = 'keyname.txt';
             $current = file_get_contents($file);
             $current .= "$keyname";
