@@ -156,21 +156,16 @@ foreach ($events as $event) {
                 $no_post = new PostbackTemplateActionBuilder("解錠", "解錠");		//「いいえ」ボタン
                 $confirm = new ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);	//confirmテンプレ作成
                 $confirm_message = new TemplateMessageBuilder("施錠確認", $confirm);	//confirmメッセージ作成
+                $message = new MultiMessageBuilder();
+                $message->add($confirm_message);
 
-                $confirmMessageBuilder = new \LINE\LINEBot\MessageBuilder($confirm_message);
-                $response = $bot->replyMessage($event->replyToken, $confirmMessageBuilder);
+                $res = $bot->replyMessage($event->getReplyToken(), $message);
             break;
 
             case '施錠状況':
             $keyMessage = "現在の施錠状況です";
             $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
-            break;
-
-            case 'みなみ':
-            $message = array('type'               => 'image',
-                             'originalContentUrl' => 'https://pics.prcm.jp/yunosuke5522/27820061/jpeg/27820061.jpeg',
-                             'previewImageUrl'    => 'https://www.bing.com/images/search?view=detailV2&ccid=NbC3oKeN&id=6A8E54647562227D2285B814AFD68AD49C3D611A&thid=OIP.NbC3oKeNt9bv8Y-bJrsLcQHaJj&mediaurl=http%3a%2f%2fpic.prepics-cdn.com%2fyunosuke5522%2f27820061.jpeg&exph=1163&expw=902&q=%e6%98%9f%e9%87%8e%e3%81%bf%e3%81%aa%e3%81%bf&simid=608018348973557109&selectedIndex=6&ajaxhist=0');
             break;
 
 /*            case 'test':
@@ -182,10 +177,6 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
             break;
 */
-
-            case 'image':
-            
-            break;
 
             default:
             $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
