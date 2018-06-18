@@ -110,7 +110,7 @@ foreach ($events as $event) {
             $file = 'keyname3.txt';
             file_put_contents($file, $keyname3);
             $data = file_get_contents('keyname3.txt', true);
-            $dataMessage = "$dataを登録しました";
+            $dataMessage = "'$data'を登録しました";
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
         }
