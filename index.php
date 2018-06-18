@@ -139,7 +139,10 @@ foreach ($events as $event) {
             break;
 
             case '鍵の確認':
-            $checkMessage = "現在以下の鍵が登録されています\n鍵1:"."$keyname1"."\n鍵2:"."$keyname2"."\n鍵3:"."$keyname3";
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $checkMessage = "現在以下の鍵が登録されています\n鍵1:"."$data1"."\n鍵2:"."$data2"."\n鍵3:"."$data3";
             $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
             $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
             break;
@@ -156,7 +159,7 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             break;
 
-            case 'test':
+/*            case 'test':
             $data1 = file_get_contents('keyname1.txt', true);
             $data2 = file_get_contents('keyname2.txt', true);
             $data3 = file_get_contents('keyname3.txt', true);
@@ -164,7 +167,7 @@ foreach ($events as $event) {
             $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
             $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
             break;
-
+*/
             default:
             $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
             $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
