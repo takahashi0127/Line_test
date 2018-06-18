@@ -133,7 +133,7 @@ foreach ($events as $event) {
             break;
 
             case '鍵の登録':
-            $registerMessage = "先頭に「reg(鍵番号):」と付けて鍵の名前を入力してください。\n現在3つまで登録できます。\n例)→「reg1:玄関」";
+            $registerMessage = "先頭に「reg(鍵番号):」と付けて鍵の名前を入力してください。\n現在3つまで登録可能です。\n例)→「reg1:玄関」";
             $registerMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
             $response = $bot->replyMessage($event->replyToken, $registerMessageBuilder);
             break;
@@ -148,9 +148,13 @@ foreach ($events as $event) {
             break;
 
             case '施錠確認':
-            $checkMessage = "施錠確認を開始します";
-            $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
-            $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $yes_post = new PostbackTemplateActionBuilder("施錠", "page={$page}");
+            $no_post = new PostbackTemplateActionBuilder("解錠", "page=-1");
+            $confirm = new ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);
+            $confirm_message = new TemplateMessageBuilder("施錠確認", $confirm);
             break;
 
             case '施錠状況':
@@ -168,6 +172,11 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
             break;
 */
+
+            case 'image':
+            
+            break;
+
             default:
             $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
             $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
