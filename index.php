@@ -90,7 +90,8 @@ foreach ($events as $event) {
             //$current = file_get_contents($file);
             //$current .= "$keyname";
             file_put_contents($file, $keyname1);
-            $dataMessage = file_get_contents('keyname1.txt', true);
+            $data = file_get_contents('keyname1.txt', true);
+            $dataMessage = "'$data'を「鍵1」として登録しました";
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
       //      file_put_contents("keyname.php", $regMessage);
@@ -100,7 +101,8 @@ foreach ($events as $event) {
             $keyname2 = substr($text, 5);
             $file = 'keyname2.txt';
             file_put_contents($file, $keyname2);
-            $dataMessage = file_get_contents('keyname2.txt', true);
+            $data = file_get_contents('keyname2.txt', true);
+            $dataMessage = "'$data'を「鍵2」として登録しました";
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
         }
@@ -110,7 +112,7 @@ foreach ($events as $event) {
             $file = 'keyname3.txt';
             file_put_contents($file, $keyname3);
             $data = file_get_contents('keyname3.txt', true);
-            $dataMessage = "'$data'を登録しました";
+            $dataMessage = "'$data'を「鍵3として」登録しました";
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
         }
