@@ -123,10 +123,10 @@ foreach ($events as $event) {
 
             case 'test':
             $file = 'hiroki.txt';
-            //$current = file_put_contents($file);
-            //$current .= "kawanaka";
-            $data = file_put_contents($file, "$current");
-            $dataMessage = file_get_contents($data);
+            $current = file_put_contents($file);
+            $current .= "kawanaka";
+            $data = file_put_contents($file, $current);
+            $dataMessage = file_get_contents($current);
 //            $dataMessage = require_once __DIR__ . '/keyname.php';
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
