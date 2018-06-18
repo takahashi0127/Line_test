@@ -155,7 +155,8 @@ foreach ($events as $event) {
             $no_post = new PostbackTemplateActionBuilder("解錠", "page=-1");
             $confirm = new ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);
             $confirm_message = new TemplateMessageBuilder("施錠確認", $confirm);
-            $response = $bot->replyMessage($event->replyToken, $confirm_message);
+            $message->add($confirm_message);
+            $response = $bot->replyMessage($event->replyToken, $message);
             break;
 
             case '施錠状況':
