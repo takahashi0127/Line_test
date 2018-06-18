@@ -168,12 +168,26 @@ foreach ($events as $event) {
             break;
 
 /*            case 'test':
-            $data1 = file_get_contents('keyname1.txt', true);
-            $data2 = file_get_contents('keyname2.txt', true);
-            $data3 = file_get_contents('keyname3.txt', true);
-            $testMessage = "$data1\n"."$data2\n"."$data3\n";
-            $testMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($testMessage);
-            $response = $bot->replyMessage($event->replyToken, $testMessageBuilder);
+            {
+               "type": "template",
+  "altText": "this is a confirm template",
+  "template": {
+      "type": "confirm",
+      "text": "Are you sure?",
+      "actions": [
+          {
+            "type": "message",
+            "label": "Yes",
+            "text": "yes"
+          },
+          {
+            "type": "message",
+            "label": "No",
+            "text": "no"
+          }
+      ]
+  }
+}
             break;
 */
 
