@@ -124,10 +124,9 @@ foreach ($events as $event) {
             case 'test':
             $file = 'keyname.txt';
             $current = file_get_contents($file);
-            $current .= "kawanaka";
+            //$current .= "kawanaka";
             file_put_contents($file, $current);
             $dataMessage = file_get_contents('./keyname.txt', true);
-//            $dataMessage = require_once __DIR__ . '/keyname.php';
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
 //          include 'keyname.php';
