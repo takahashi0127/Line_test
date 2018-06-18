@@ -153,12 +153,10 @@ foreach ($events as $event) {
                 $data3 = file_get_contents('keyname3.txt', true);
 
                 $yes_post = new PostbackTemplateActionBuilder("施錠", "1");		//「はい」ボタン
-                $no_post = new PostbackTemplateActionBuilder("解錠", "0");		//「いいえ」ボタン
-                $confirm = new ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);	//confirmテンプレ作成
-                $confirm_message = new TemplateMessageBuilder("施錠確認", $confirm);	//confirmメッセージ作成
-                $message = new MultiMessageBuilder($confirm_message);
-
-                $response = $bot->replyMessage($event->replyToken, $message);
+                $no_post = new \LINE\LINEBot\PostbackTemplateActionBuilder("解錠", "0");		//「いいえ」ボタン
+                $confirm = new \LINE\LINEBot\ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);	//confirmテンプレ作成
+                $confirm_message = new \LINE\LINEBot\TemplateMessageBuilder("施錠確認", $confirm);	//confirmメッセージ作成
+                $response = $bot->replyMessage($event->replyToken, $confirm_message);
             break;
 
             case '施錠状況':
@@ -167,29 +165,10 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             break;
 
-           case 'test':
-            {
-               "type": "template",
-  "altText": "this is a confirm template",
-  "template": {
-      "type": "confirm",
-      "text": "Are you sure?",
-      "actions": [
-          {
-            "type": "message",
-            "label": "Yes",
-            "text": "yes"
-          },
-          {
-            "type": "message",
-            "label": "No",
-            "text": "no"
-          }
-      ]
-  }
-}
-            break;
+/*           case 'test':
 
+            break;
+*/
 
             default:
             $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
