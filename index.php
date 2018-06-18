@@ -88,8 +88,8 @@ foreach ($events as $event) {
      //       $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
             $file = 'keyname.txt';
             //$current = file_get_contents($file);
-            $current .= "$keyname";
-            file_put_contents($file, $current, FILE_APPEND);
+            //$current .= "$keyname";
+            file_put_contents($file, $keyname, FILE_APPEND);
             $dataMessage = file_get_contents('./keyname.txt', true);
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
