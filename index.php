@@ -129,11 +129,11 @@ foreach ($events as $event) {
         switch ($text){
 
             case 'ヘルプ':
-            $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
+            $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「鍵の確認」：登録されている鍵を確認します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
             break;
 
             case '鍵の登録':
-            $registerMessage = "先頭に「reg:」と付けて鍵の名前を入力してください";
+            $registerMessage = "先頭に「reg(鍵番号):」と付けて鍵の名前を入力してください。\n現在3つまで登録できます。\n例)→「reg1:玄関」";
             $registerMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
             $response = $bot->replyMessage($event->replyToken, $registerMessageBuilder);
             break;
