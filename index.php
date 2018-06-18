@@ -125,8 +125,8 @@ foreach ($events as $event) {
             $file = 'keyname.txt';
             $current = file_get_contents($file);
             $current .= "kawanaka";
-            $data = file_put_contents($file, $current);
-            $dataMessage = file_get_contents('./$file', true);
+            file_put_contents($file, $current);
+            $dataMessage = file_get_contents('./keyname.txt', true);
 //            $dataMessage = require_once __DIR__ . '/keyname.php';
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
