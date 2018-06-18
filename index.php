@@ -89,7 +89,7 @@ foreach ($events as $event) {
             $file = 'keyname1.txt';
             //$current = file_get_contents($file);
             //$current .= "$keyname";
-            file_put_contents($file, $keyname1, FILE_APPEND | LOCK_EX);
+            file_put_contents($file, $keyname1);
             $dataMessage = file_get_contents('keyname1.txt', true);
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
@@ -108,8 +108,9 @@ foreach ($events as $event) {
         else if ($aymMessage == "reg3:"){
             $keyname3 = substr($text, 5);
             $file = 'keyname3.txt';
-            file_put_contents($file, $keyname3, FILE_APPEND | LOCK_EX);
-            $dataMessage = file_get_contents('keyname3.txt', true);
+            file_put_contents($file, $keyname3);
+            $data = file_get_contents('keyname3.txt', true);
+            $dataMessage = "$dataを登録しました";
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
         }
