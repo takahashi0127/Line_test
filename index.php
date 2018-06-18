@@ -117,7 +117,7 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
         }
 
-        else{
+        //else{
             
 
 //            $regMessage = "no";
@@ -169,7 +169,7 @@ foreach ($events as $event) {
 
         }//switch
 
-        }//else(text == reg以外)
+    //    }//else(text == reg以外)
     }//elseif(text)
 
 /*    else if ($event->message->text != "ヘルプ"){
