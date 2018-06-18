@@ -147,18 +147,26 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
             break;
 
-            case '施錠確認':
+ /*           case '施錠確認':
                 $data1 = file_get_contents('keyname1.txt', true);
                 $data2 = file_get_contents('keyname2.txt', true);
                 $data3 = file_get_contents('keyname3.txt', true);
+                $alternativeText = "施錠確認中";
+      //          $action1 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("施錠", "lock");
+      //          $action2 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock");
+                $text = "状態を選択してください";
 
-                $yes_post = new PostbackTemplateActionBuilder("施錠", "1");		//「はい」ボタン
-                $no_post = new \LINE\LINEBot\PostbackTemplateActionBuilder("解錠", "0");		//「いいえ」ボタン
-                $confirm = new \LINE\LINEBot\ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);	//confirmテンプレ作成
-                $confirm_message = new \LINE\LINEBot\TemplateMessageBuilder("施錠確認", $confirm);	//confirmメッセージ作成
-                $response = $bot->replyMessage($event->replyToken, $confirm_message);
+                function replyButtonsTemplate($bot, $event->replyToken, $alternativeText, $data1, $text, $actions){
+                    $actionArray = array();
+                    foreach($actions as $value) {
+                        array_push($actionArray, $value);
+                    }
+
+                    $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder($alternativeText, new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($data1, $text, $actionArray));
+                    $response = $bot->replyMessage($replyToken, $builder);
+                }
             break;
-
+*/
             case '施錠状況':
             $keyMessage = "現在の施錠状況です";
             $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
