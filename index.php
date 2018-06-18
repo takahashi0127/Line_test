@@ -152,8 +152,8 @@ foreach ($events as $event) {
                 $data2 = file_get_contents('keyname2.txt', true);
                 $data3 = file_get_contents('keyname3.txt', true);
 
-                $yes_post = new PostbackTemplateActionBuilder("施錠", "施錠");		//「はい」ボタン
-                $no_post = new PostbackTemplateActionBuilder("解錠", "解錠");		//「いいえ」ボタン
+                $yes_post = new PostbackTemplateActionBuilder("施錠", "1");		//「はい」ボタン
+                $no_post = new PostbackTemplateActionBuilder("解錠", "0");		//「いいえ」ボタン
                 $confirm = new ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);	//confirmテンプレ作成
                 $confirm_message = new TemplateMessageBuilder("施錠確認", $confirm);	//confirmメッセージ作成
                 $message = new MultiMessageBuilder();
