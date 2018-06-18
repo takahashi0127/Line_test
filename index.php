@@ -159,7 +159,7 @@ foreach ($events as $event) {
                 $message = new MultiMessageBuilder();
                 $message->add($confirm_message);
 
-                $res = $bot->replyMessage($event->getReplyToken(), $message);
+                $res = $bot->replyMessage($event->replyToken, $message);
             break;
 
             case '施錠状況':
