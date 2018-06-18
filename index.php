@@ -167,7 +167,7 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             break;
 
-/*            case 'test':
+           case 'test':
             {
                "type": "template",
   "altText": "this is a confirm template",
@@ -189,7 +189,7 @@ foreach ($events as $event) {
   }
 }
             break;
-*/
+
 
             default:
             $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
