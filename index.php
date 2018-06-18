@@ -151,7 +151,7 @@ foreach ($events as $event) {
             $data1 = file_get_contents('keyname1.txt', true);
             $data2 = file_get_contents('keyname2.txt', true);
             $data3 = file_get_contents('keyname3.txt', true);
-            $yes_post = new PostbackTemplateActionBuilder("施錠", "page={$page}");
+            $yes_post = new PostbackTemplateActionBuilder("施錠", "page=1");
             $no_post = new PostbackTemplateActionBuilder("解錠", "page=-1");
             $confirm = new ConfirmTemplateBuilder("$data1", [$yes_post, $no_post]);
             $confirm_message = new TemplateMessageBuilder("施錠確認", $confirm);
