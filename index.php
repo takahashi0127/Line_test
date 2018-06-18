@@ -125,7 +125,7 @@ foreach ($events as $event) {
             $file = 'hiroki.txt';
             $current = file_put_contents($file);
             $current .= "kawanaka";
-            $data = file_put_contents($file, $current);
+//            $data = file_put_contents($file, $current);
             $dataMessage = file_get_contents($file);
 //            $dataMessage = require_once __DIR__ . '/keyname.php';
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
