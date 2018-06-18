@@ -99,7 +99,7 @@ foreach ($events as $event) {
         else if ($aymMessage == "reg2:"){
             $keyname2 = substr($text, 5);
             $file = 'keyname2.txt';
-            file_put_contents($file, $keyname2, FILE_APPEND | LOCK_EX);
+            file_put_contents($file, $keyname2);
             $dataMessage = file_get_contents('keyname2.txt', true);
             $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
             $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
