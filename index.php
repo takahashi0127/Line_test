@@ -138,6 +138,12 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $registerMessageBuilder);
             break;
 
+            case '鍵の確認':
+            $checkMessage = "現在以下の鍵が登録されています\n鍵1:$keyname1\n鍵2:keyname2\n鍵3:keyname3";
+            $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
+            $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
+            break;
+
             case '施錠確認':
             $checkMessage = "施錠確認を開始します";
             $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
@@ -150,17 +156,8 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
             break;
 
-            case 'test':
-            $file = 'keyname.txt';
-            $current = file_get_contents($file);
-            $current .= "kawanaka";
-            file_put_contents($file, $current);
-            $dataMessage = file_get_contents('./keyname.txt', true);
-            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
-            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
-//          include 'keyname.php';
-//          file_put_contents($filename, "aaa");
-            break;
+            //case 'test':
+            //break;
 
             default:
             $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
