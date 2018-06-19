@@ -178,7 +178,7 @@ foreach ($events as $event) {
  //           $conflock3 = file_get_contents('lock3.txt', true);
 
 
-            $checkMessage = "現在の施錠状況です\n「"."$data1"."」:".$conflock1;
+            $checkMessage = "現在の施錠状況です\n「"."$data1"."」:"."$conflock1";
             $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
             $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
 
@@ -210,7 +210,7 @@ foreach ($events as $event) {
             file_put_contents(lock1.txt, "Lock");
 
         case O:
-            file_put_contents(lock2.txt, "Unlock");
+            file_put_contents(lock1.txt, "Unlock");
         
 
         }//switch
