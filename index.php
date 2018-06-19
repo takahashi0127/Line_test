@@ -148,14 +148,14 @@ foreach ($events as $event) {
             break;
 
             case '施錠確認':
-                $datatest = file_get_contents('keyname1.txt', true)."/".file_get_contents('keyname2.txt', true)."/".file_get_contents('keyname3.txt', true);
+                $keys = file_get_contents('keyname1.txt', true)."/".file_get_contents('keyname2.txt', true)."/".file_get_contents('keyname3.txt', true);
 //                $data = explode("/", $datatest);
 //                $data[0] = file_get_contents('keyname1.txt', true);
 //                $data[1] = file_get_contents('keyname2.txt', true);
 //                $data[2] = file_get_contents('keyname3.txt', true);
-                $keys = explode("/", $datatest);
+      //          $keys = explode("/", $datatest);
       //          $now = date('Y-m-d H:i:s');
-                $confirmMessage = $num[0]."の状態を選択してください";
+                $confirmMessage = $keys[0]."の状態を選択してください";
 
                 //はい ボタン
                 $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", $data[0].":Lock");
