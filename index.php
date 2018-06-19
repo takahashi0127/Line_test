@@ -56,7 +56,7 @@ foreach ($events as $event) {
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
-        elseif (($type === "leave")) {
+        elseif (($type == "leave")) {
             $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
     //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
     //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
