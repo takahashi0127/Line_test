@@ -151,10 +151,10 @@ foreach ($events as $event) {
                 $data1 = file_get_contents('keyname1.txt', true);
                 $data2 = file_get_contents('keyname2.txt', true);
                 $data3 = file_get_contents('keyname3.txt', true);
-                $alternativeText = "施錠確認中";
+      //          $alternativeText = "施錠確認中";
       //          $action1 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("施錠", "lock");
       //          $action2 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock");
-                $text = "状態を選択してください";
+      //          $text = "状態を選択してください";
                 replyConfirmTemplate($bot,$event->replyToken, "施錠確認","施錠確認中", new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder ("施錠", "lock"), new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock"));
 
                 
