@@ -148,9 +148,9 @@ foreach ($events as $event) {
             break;
 
             case '施錠確認':
-                $data1 = file_get_contents('keyname1.txt', true);
-                $data2 = file_get_contents('keyname2.txt', true);
-                $data3 = file_get_contents('keyname3.txt', true);
+      //          $data1 = file_get_contents('keyname1.txt', true);
+      //          $data2 = file_get_contents('keyname2.txt', true);
+      //          $data3 = file_get_contents('keyname3.txt', true);
       //          $alternativeText = "施錠確認中";
       //          $action1 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("施錠", "lock");
       //          $action2 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock");
