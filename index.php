@@ -83,12 +83,8 @@ foreach ($events as $event) {
 
        if ($aymMessage == "reg1:"){
             $keyname1 = substr($text, 5);
-    //        $regMessage = "$keynameが登録されました"
-    //        $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
-     //       $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
             $file = 'keyname1.txt';
-            //$current = file_get_contents($file);
-            //$current .= "$keyname";
+
             file_put_contents($file, $keyname1);
             $data = file_get_contents('keyname1.txt', true);
             $dataMessage = "'$data'を「鍵1」として登録しました";
@@ -158,9 +154,9 @@ foreach ($events as $event) {
                 $confirmMessage = $keys[0]."の状態を選択してください";
 
                 //はい ボタン
-                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", $data[0].":Lock");
+                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", $data[0]."I");
                 //いいえボタン
-                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", $data[0].":Unlock");
+                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", $data[0]."O");
 
                 //Confirmテンプレート
                 $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage, [$yes_post, $no_post]);
@@ -171,9 +167,20 @@ foreach ($events as $event) {
             break;
 
             case '施錠状況':
-            $keyMessage = "現在の施錠状況です";
-            $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
-            $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
+//            $keyMessage = "現在の施錠状況です";
+//            $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
+//            $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $conflock1 = file_get_contents('lock1.txt', true);
+ //           $conflock2 = file_get_contents('lock2.txt', true);
+ //           $conflock3 = file_get_contents('lock3.txt', true);
+
+
+            $checkMessage = "現在の施錠状況です\n「"."$data1"."」:".$conflock1;
+            $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
+            $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
 
 
             break;
@@ -192,6 +199,22 @@ foreach ($events as $event) {
 
     //    }//else(text == reg以外)
     }//elseif(text)
+
+    else if ($event->postback->data){//ボタンが押されたとき
+        $botton = $event->postback->data;
+        $situation = substr($event->postback->data, -1);
+
+        switch ($situation){
+
+        case I:
+            file_put_contents(lock1.txt, "Lock");
+
+        case O:
+            file_put_contents(lock2.txt, "Unlock");
+        
+
+        }//switch
+    }
 
 /*    else if ($event->message->text != "ヘルプ"){
         $replyMessage = $event->message->text;
