@@ -145,7 +145,7 @@ foreach ($events as $event) {
 
             case '施錠確認':
                 $keys = file_get_contents('keyname1.txt', true)."/".file_get_contents('keyname2.txt', true)."/".file_get_contents('keyname3.txt', true);
-                $data = explode("/", $datatest);
+                $keydata = explode("/", $keys);
 //                $data[0] = file_get_contents('keyname1.txt', true);
 //                $data[1] = file_get_contents('keyname2.txt', true);
 //                $data[2] = file_get_contents('keyname3.txt', true);
@@ -154,9 +154,9 @@ foreach ($events as $event) {
                 $confirmMessage = $data[0]."の状態を選択してください";
 
                 //はい ボタン
-                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", $data[0]."I");
+                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", $keydata[0]."I");
                 //いいえボタン
-                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", $data[0]."O");
+                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", $keydata[0]."O");
 
                 //Confirmテンプレート
                 $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage, [$yes_post, $no_post]);
