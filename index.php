@@ -148,17 +148,19 @@ foreach ($events as $event) {
             break;
 
             case '施錠確認':
-      //          $data1 = file_get_contents('keyname1.txt', true);
-      //          $data2 = file_get_contents('keyname2.txt', true);
-      //          $data3 = file_get_contents('keyname3.txt', true);
-                $num = explode("/", $userMessage);
-                $now = date('Y-m-d H:i:s');
-                $confirmMessage = "射数:".$num[1]."\n的中数:".$num[0]."\nで登録をします\n".$now;
+                $datatest = file_get_contents('keyname1.txt', true)."/".file_get_contents('keyname2.txt', true)."/".file_get_contents('keyname3.txt', true);
+//                $data = explode("/", $datatest);
+//                $data[0] = file_get_contents('keyname1.txt', true);
+//                $data[1] = file_get_contents('keyname2.txt', true);
+//                $data[2] = file_get_contents('keyname3.txt', true);
+                $keys = explode("/", $datatest);
+      //          $now = date('Y-m-d H:i:s');
+                $confirmMessage = $num[0]."の状態を選択してください";
 
                 //はい ボタン
-                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("はい", $userMessage."@".$now);
+                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", $data[0].":Lock");
                 //いいえボタン
-                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("いいえ", "no@".$now);
+                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", $data[0].":Unlock");
 
                 //Confirmテンプレート
                 $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage, [$yes_post, $no_post]);
