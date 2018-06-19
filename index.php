@@ -155,7 +155,7 @@ foreach ($events as $event) {
       //          $action1 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("施錠", "lock");
       //          $action2 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock");
       //          $text = "状態を選択してください";
-            replyConfirmTemplate($bot,$event->replyToken, "施錠確認","施錠確認中", new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder ("施錠", "lock"), new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock"));
+            replyConfirmTemplate($bot, $event->replyToken, "施錠確認","施錠確認中", new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder ("施錠", "lock"), new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock"));
 
                 
             break;
