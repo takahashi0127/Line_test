@@ -147,7 +147,7 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
             break;
 
- /*           case '施錠確認':
+            case '施錠確認':
                 $data1 = file_get_contents('keyname1.txt', true);
                 $data2 = file_get_contents('keyname2.txt', true);
                 $data3 = file_get_contents('keyname3.txt', true);
@@ -155,22 +155,17 @@ foreach ($events as $event) {
       //          $action1 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("施錠", "lock");
       //          $action2 = new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock");
                 $text = "状態を選択してください";
+                replyConfirmTemplate($bot,$event->replyToken,"施錠確認","施錠確認中", new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder ("施錠", "lock"), new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder ("解錠", "unlock"));
 
-                function replyButtonsTemplate($bot, $event->replyToken, $alternativeText, $data1, $text, $actions){
-                    $actionArray = array();
-                    foreach($actions as $value) {
-                        array_push($actionArray, $value);
-                    }
-
-                    $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder($alternativeText, new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder ($data1, $text, $actionArray));
-                    $response = $bot->replyMessage($replyToken, $builder);
-                }
+                
             break;
-*/
+
             case '施錠状況':
             $keyMessage = "現在の施錠状況です";
             $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
             $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
+
+
             break;
 
 /*           case 'test':
@@ -215,5 +210,17 @@ $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 //var_export($response, true);
 error_log(var_export($response,true));
 
+//confirmテンプレート
+function replyConfirmTemplate($bot, $replyToken, $alternativeText, $text, $actions) {
+  $actionArray = array();
+  foreach($actions as $value) {
+    array_push($actionArray, $value);
+  }
+  $builder = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder($alternativeText, new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder ($text, $actionArray));
+  $response = $bot->replyMessage($replyToken, $builder);
+  if (!$response->isSucceeded()) {
+    error_log('Failed!'. $response->getHTTPStatus . ' ' . $response->getRawBody());
+  }
+}
 
 return 0;
