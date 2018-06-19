@@ -151,7 +151,7 @@ foreach ($events as $event) {
 //                $data[2] = file_get_contents('keyname3.txt', true);
       //          $keys = explode("/", $datatest);
       //          $now = date('Y-m-d H:i:s');
-                $confirmMessage = $data[0]."の状態を選択してください";
+                $confirmMessage = $keydata[0]."の状態を選択してください";
 
                 //はい ボタン
                 $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", $keydata[0]."I");
