@@ -207,10 +207,25 @@ foreach ($events as $event) {
         switch ($situation){
 
         case I:
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $lockmessage = $data1."：施錠";
             file_put_contents(lock1.txt, "Lock");
 
+            $lockMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($lockMessage);
+            $response = $bot->replyMessage($event->replyToken, $lockMessageBuilder);
+
+
         case O:
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $lockmessage = $data1."：施錠";
             file_put_contents(lock1.txt, "Unlock");
+
+            $lockMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($lockMessage);
+            $response = $bot->replyMessage($event->replyToken, $lockMessageBuilder);
         
 
         }//switch
