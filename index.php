@@ -210,7 +210,7 @@ foreach ($events as $event) {
             $conflock3 = file_get_contents('lock3.txt', true);
 
 
-            $checkMessage = "現在の施錠状況です\n「".$data1."」:".$conflock1.$data2."」:".$conflock2.$data3."」:".$conflock3;
+            $checkMessage = "現在の施錠状況です\n「".$data1."」:".$conflock1."\n「".$data2."」:".$conflock2."\n「".$data3."」:".$conflock3;
             $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
             $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
 
