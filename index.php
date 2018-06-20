@@ -200,7 +200,7 @@ foreach ($events as $event) {
     //    }//else(text == reg以外)
     }//elseif(text)
 
-    else if ($event->message->type == "postback"){//ボタンが押されたとき
+    else if ($event->message->type->postback == "data"){//ボタンが押されたとき
         $botton = $event->postback->data;
         $situation = substr($event->postback->data, -1);
 
