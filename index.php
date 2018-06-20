@@ -200,7 +200,7 @@ foreach ($events as $event) {
     //    }//else(text == reg以外)
     }//elseif(text)
 
-    else if (!empty($event->message->type->postback->data)){//ボタンが押されたとき
+    else if (isPostback($event)){//ボタンが押されたとき
         $botton = $event->postback->data;
         $situation = substr($event->postback->data, -1);
         $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($situation);
