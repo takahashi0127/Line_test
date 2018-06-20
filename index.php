@@ -1,350 +1,266 @@
 ﻿<?php
-
 require_once __DIR__ . '/vendor/autoload.php';
-
-
-
-date_default_timezone_set('Asia/Tokyo');
-
-
 
 error_log("start");
 
-
-
 // POSTを受け取る
-
 $postData = file_get_contents('php://input');
-
 error_log($postData);
 
-
-
 // jeson化
-
 $json = json_decode($postData);
-
-
+$events = $json->events;
+error_log(var_export($events[0], true));
 
 // ChannelAccessTokenとChannelSecret設定
-
-$httpClient = setHttpClient();
-
-$bot = createBot($httpClient);
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LineMessageAPIChannelAccessToken'));
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPIChannelSecret')]);
 
 
 
-foreach ($json->events as $event) {
 
-    //ポストバックイベントだった場合
+//追記部分
+$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$filename = "keyname.txt";
+$sample = "aaa";
 
-    if (isPostback($event)) {
 
-        error_log(var_export($event, true));
+//$events = $bot->parseEventRequest(file_get_contents('php://input'),$signature);
 
-        if (isGroup($event)) { //グループからの送信なら何もしない
-
-            return;
-
+/*foreach ($events as $event) {
+    if (($event instanceof \LINE\LINEBot\Event\BeaconDetectionEvent)) {
+        $type = $json_object->{"events"}[0]->{"beacon"}->{"type"};
+        if ($type === "enter") {
+            $message = "おかえりなさい";
+        }elseif (($type === "leave")) {
+            $message = "行ってらっしゃい";
         }
+        $body = <<<EOD {$message}!! EOD;
+        replyTextMessage($bot, $event->getReplyToken(), $body);
+        exit;
+    }
+}*/
 
-        //入力データを分割してパラメータを設定
+foreach ($events as $event) {
 
-        $data = explode("@", $event->postback->data);
+//var_dump( file_put_contents($filename, $sample) );
+/////////////////////////ビーコンイベント///////////////////////////////////
+  //  $beaconevent = $event->beacon->type; //enter or leave
 
-        $dateTime = $data[1]; //日時
+    if (!empty($event->beacon)) {
+        $type = $event->beacon->type; //enter or leave
 
-        $buf = explode(" ", $dateTime);
 
-        $date = $buf[0];      //日
-
-        $time = $buf[1];      //時間
-
-        $userID = $event->source->userId;  //ユーザID
-
-        $mode = insertMode($userID, $dateTime);
-
-        if ($mode["mode"] == "old") {
-
-            if ($data[0] == "no") {
-
-                return;
-
-            } else {
-
-                $message = array("無効なデータです");
-
-                $bot->replyMessage($event->replyToken, buildMessages($message));
-
-                return;
-
-            }
-
+        if ($type == "enter"){
+            $replyMessage = "おかえりなさい\n戸締りの確認をしましょう";
+    //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
+    //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
-
-        if ($data[0] == "no" ) { //noなら時間の更新だけ行う
-
-            try { //データベースに接続
-
-                $pdo = connectDataBase();
-
-                $stmt = $pdo->prepare("update record set time=:time where userid = :userID and date=:date");
-
-                $stmt->bindParam(':time', $time, PDO::PARAM_STR);
-
-                $stmt->bindParam(':userID', $userID, PDO::PARAM_STR);
-
-                $stmt->bindParam(':date', $date, PDO::PARAM_STR);
-
-                $stmt->execute();
-
-            } catch (PDOException $e) {
-
-                echo "PDO Error:".$e->getMessage()."\n";
-
-                die();
-
-            }
-
-            $pdo = null;
-
-            $stmt = null;
-
-            //メッセージ送信
-
-            $message = array("キャンセルしました\n".$dateTime);
-
-            $bot->replyMessage($event->replyToken, buildMessages($message));
-
-            return;
-
-        } else {//yesならレコードの登録を行う
-
-            $data = explode("/", $data[0]);
-
-            $hit = $data[0];
-
-            $atmpt = $data[1];
-
-            try {//データベースに接続
-
-                $pdo = connectDataBase();
-
-                if ($mode["mode"] == "update") {
-
-                    //登録済みだった場合レコードを更新
-
-                    $hit += $mode['hit'];
-
-                    $atmpt += $mode['atmpt'];
-
-                    $stmt = $pdo->prepare("update record set hit=:hit, atmpt=:atmpt, time=:time where userid = :userID and date=:date");
-
-                } else if ($mode["mode"] == "insert") {
-
-                    //登録されていなかった場合レコードを挿入
-
-                    $stmt = $pdo->prepare("insert into record values(:userID, :hit, :atmpt, :date, :time)");
-
-                }
-
-                $stmt->bindParam(':userID', $userID, PDO::PARAM_STR);
-
-                $stmt->bindParam(':hit', $hit, PDO::PARAM_INT);
-
-                $stmt->bindParam(':atmpt', $atmpt, PDO::PARAM_INT);
-
-                $stmt->bindParam(':date', $date, PDO::PARAM_STR);
-
-                $stmt->bindParam(':time', $time, PDO::PARAM_STR);
-
-                $stmt->execute();
-
-            } catch (PDOException $e) {
-
-                echo "PDO Error:".$e->getMessage()."\n";
-
-                die();
-
-            }
-
-            $pdo = null;
-
-            $stmt = null;
-
-            //メッセージ送信
-
-            $message = array("登録しました\n今日の記録:\n射数:".$atmpt."\n的中数:".$hit."\n".$dateTime);
-
-            $bot->replyMessage($event->replyToken, buildMessages($message));
-
-            return;
-
+        elseif (($type == "leave")) {
+            $replyMessage = "行ってらっしゃい\n鍵は閉めましたか？";
+    //        $replyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
+    //        $response = $bot->replyMessage($event->replyToken, $replyMessageBuilder);
         }
-
-    }//end of [if (isPostback($event))]
-
-    // イベントタイプがmessage
-
-    else if (isMessage($event)) {
-
-        //ここから応答
-
-        $textMessages = array(); //送信する文字列たちを格納する配列
-
-        // メッセージタイプが文字列の場合
-
-        if (isMessage_Text($event)) {
-
-            $userMessage = $event->message->text;
-
-            $mode = replyMode($userMessage);
-
-            //それぞれのモードに対して応答
-
-            switch ($mode) {
-
-            case "hello":
-
-                $textMessages[] = "はい";
-
-                break;
-
-            case "insert_request":
-
-                $num = explode("/", $userMessage);
-
-                $now = date('Y-m-d H:i:s');
-
-                $confirmMessage = "射数:".$num[1]."\n的中数:".$num[0]."\nで登録をします\n".$now;
-
-                //はい ボタン
-
-                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("はい", $userMessage."@".$now);
-
-                //いいえボタン
-
-                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("いいえ", "no@".$now);
-
-                //Confirmテンプレート
-
-                $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage, [$yes_post, $no_post]);
-
-                // Confirmメッセージを作る
-
-                $replyMessage = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージ", $confirm);
-
-                $response = $bot->replyMessage($event->replyToken, $replyMessage);
-
-                error_log(var_export($response,true));
-
-                return;
-
-            case "explain":
-
-                //herokuにデプロイした画像を使ってテストしてみる?
-
-                //$picture = 'https://'.$_SERVER['HTTP_HOST'].'/imgs/original.jpg';
-
-                //$replyMessage = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($picture, $picture);
-
-                $textMessages[] = 'https://chart.googleapis.com/chart?cht=p&chtt=Browser+market+2008&chd=t%3A22%2C30.7%2C1.7%2C36.5%2C1.1%2C2%2C1.4&chl=IE7%7CIE6%7CIE5%7CFirefox%7CMozilla%7CSafari%7COpera&chs=400x300&chco=99C754%2C54C7C5%2C999999&chm=&chf=a%2Cs%2Cffffff"alt="Browser market 2008"style="width:400px;height:300px;"';
-
-                //$response = $bot->replyMessage($event->replyToken, $replyMessage);
-
-                //error_log(var_export($response,true));
-
-                //return;
-
-            default:
-
-                $textMessages[] = $event->message->text;
-
-                $textMessages[] = "aiueo";
-
-            }
-
-        }
-
-        //文字列以外は無視
-
-        else {
-
-            $textMessages[] = "分からん";
-
-            return;
-
-        }
-
-        
-
-        //応答メッセージをLINE用に変換
-
-        $replyMessage = buildMessages($textMessages);
-
-        
-
-        //メッセージ送信
-
-        $response = $bot->replyMessage($event->replyToken, $replyMessage);
-
-        error_log(var_export($response,true));
-
-    } else {
-
-        return;
 
     }
-
-}
-
-return;
+////////////////////////////////////////////////////////////////////////////
 
 
 
-//---------------------------------------------------------------------
-
-function setHttpClient(): \LINE\LINEBot\HTTPClient\CurlHTTPClient
-
-{
-
-    $client = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LineMessageAPIChannelAccessToken'));
-
-    return $client;
-
-}
 
 
 
-function createBot(\LINE\LINEBot\HTTPClient\CurlHTTPClient $httpClient): \LINE\LINEBot
 
-{
+/////////////////////////テキストイベント////////////////////////////////////////////////////////////////////////////////
+    else if ($event->message->type == "text"){
 
-    $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LineMessageAPIChannelSecret')]);
+    //$replyMessage = null;
+        $text = $event->message->text;
+     //   $replyMessage = $event->message->text;
+        $aymMessage = substr($text, 0, 5);
+ //       $aymMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($aymMessage);
+ //       $response = $bot->replyMessage($event->replyToken, $aymMessageBuilder);
 
-    return $bot;
+       if ($aymMessage == "reg1:"){
+            $keyname1 = substr($text, 5);
+            $file = 'keyname1.txt';
 
-}
+            file_put_contents($file, $keyname1);
+            $data = file_get_contents('keyname1.txt', true);
+            $dataMessage = "'$data'を「鍵1」として登録しました";
+            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+      //      file_put_contents("keyname.php", $regMessage);
+        }
 
-/*データベース接続*/
+        else if ($aymMessage == "reg2:"){
+            $keyname2 = substr($text, 5);
+            $file = 'keyname2.txt';
+            file_put_contents($file, $keyname2);
+            $data = file_get_contents('keyname2.txt', true);
+            $dataMessage = "'$data'を「鍵2」として登録しました";
+            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+        }
 
-function connectDataBase(): PDO
+        else if ($aymMessage == "reg3:"){
+            $keyname3 = substr($text, 5);
+            $file = 'keyname3.txt';
+            file_put_contents($file, $keyname3);
+            $data = file_get_contents('keyname3.txt', true);
+            $dataMessage = "'$data'を「鍵3」として登録しました";
+            $dataMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($dataMessage);
+            $response = $bot->replyMessage($event->replyToken, $dataMessageBuilder);
+        }
 
-{
+        //else{
+            
 
-    $url = parse_url(getenv('DATABASE_URL'));
+//            $regMessage = "no";
+//            $regMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($regMessage);
+//            $response = $bot->replyMessage($event->replyToken, $regMessageBuilder);
+        
 
-    $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+///////メッセージタイプが文字列の場合////////////
+        switch ($text){
 
-    $pdo = new PDO($dsn, $url['user'], $url['pass']);
+            case 'ヘルプ':
+            $replyMessage = "以下のコマンドが使用可能です。\n\n「鍵の登録」:施錠の確認を行いたい鍵を登録します。\n\n「鍵の確認」：登録されている鍵を確認します。\n\n「施錠確認」:登録されている鍵の施錠確認を開始します。\n\n「施錠状況」:登録されている鍵の状態を表示します。";
+            break;
 
-    return $pdo;
+            case '鍵の登録':
+            $registerMessage = "先頭に「reg(鍵番号):」と付けて鍵の名前を入力してください。\n現在3つまで登録可能です。\n例)→「reg1:玄関」";
+            $registerMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($registerMessage);
+            $response = $bot->replyMessage($event->replyToken, $registerMessageBuilder);
+            break;
 
-}
+            case '鍵の確認':
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $checkMessage = "現在以下の鍵が登録されています\n鍵1:"."$data1"."\n鍵2:"."$data2"."\n鍵3:"."$data3";
+            $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
+            $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
+            break;
+
+            case '施錠確認':
+                $keys = file_get_contents('keyname1.txt', true)."/".file_get_contents('keyname2.txt', true)."/".file_get_contents('keyname3.txt', true);
+                $keydata = explode("/", $keys);
+//                $data[0] = file_get_contents('keyname1.txt', true);
+//                $data[1] = file_get_contents('keyname2.txt', true);
+//                $data[2] = file_get_contents('keyname3.txt', true);
+      //          $keys = explode("/", $datatest);
+      //          $now = date('Y-m-d H:i:s');
+                $confirmMessage = $keydata[0]."の状態を選択してください";
+
+                //はい ボタン
+                $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "I");
+                //いいえボタン
+                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", $keydata[0]."O");
+
+                //Confirmテンプレート
+                $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage, [$yes_post, $no_post]);
+                // Confirmメッセージを作る
+                $replyMessage = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージ", $confirm);
+                $response = $bot->replyMessage($event->replyToken, $replyMessage);
+
+            break;
+
+            case '施錠状況':
+//            $keyMessage = "現在の施錠状況です";
+//            $keyMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($keyMessage);
+//            $response = $bot->replyMessage($event->replyToken, $keyMessageBuilder);
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $conflock1 = file_get_contents('lock1.txt', true);
+ //           $conflock2 = file_get_contents('lock2.txt', true);
+ //           $conflock3 = file_get_contents('lock3.txt', true);
+
+
+            $checkMessage = "現在の施錠状況です\n「"."$data1"."」:"."$conflock1";
+            $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
+            $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
+
+
+            break;
+
+/*           case 'test':
+
+            break;
+*/
+
+            default:
+            $etcMessage = "使い方を見るには以下のコマンドを入力してください。\n「ヘルプ」";
+            $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($etcMessage);
+            $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
+
+        }//switch
+
+    //    }//else(text == reg以外)
+    }//elseif(text)
+
+    else if (isPostback($event)){//ボタンが押されたとき
+        $botton = $event->postback->data;
+        $situation = substr($button, -1);
+        $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($situation);
+        $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
+/*        switch ($situation){
+
+        case I:
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $lockmessage = $data1."：施錠";
+            file_put_contents(lock1.txt, "Lock");
+
+            $lockMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($lockMessage);
+            $response = $bot->replyMessage($event->replyToken, $lockMessageBuilder);
+
+
+        case O:
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            $lockmessage = $data1."：施錠";
+            file_put_contents(lock1.txt, "Unlock");
+
+            $lockMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($lockMessage);
+            $response = $bot->replyMessage($event->replyToken, $lockMessageBuilder);
+        
+
+        }//switch*/
+    }
+
+/*    else if ($event->message->text != "ヘルプ"){
+        $replyMessage = $event->message->text;
+        //return;
+    }
+*/
+
+//イベントタイプがmessage以外はスルー
+    else {
+        return;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-function isPostback($event): bool
+}//foreach
+
+
+
+
+// メッセージ作成
+$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMessage);
+
+// メッセージ送信
+$response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
+//var_export($response, true);
+error_log(var_export($response,true));
+
+
+function isPostback($event)
 
 {
 
@@ -360,202 +276,4 @@ function isPostback($event): bool
 
 }
 
-function isMessage($event): bool
-
-{
-
-    if ($event->type == "message") {
-
-        return true;
-
-    } else {
-
-        return false;
-
-    }
-
-}
-
-function isMessage_Text($event): bool
-
-{
-
-    if($event->message->type == "text") {
-
-        return true;
-
-    } else {
-
-        return false;
-
-    }
-
-}
-
-function isGroup($event): bool
-
-{
-
-    if ($event->source->type == "group") {
-
-        return true;
-
-    } else {
-
-        return false;
-
-    }
-
-}
-
-
-
-/*登録しようとしているデータが新しいもの(登録済みでない or Noが押されてない)か調べる
-
-insert :その日初めてのデータ > 登録
-
-old    :最新のものではないデータ > 無視
-
-update :最新のデータ > 更新する*/
-
-function insertMode($userID, $newDateTime): array
-
-{
-
-    $buf = explode(" ", $newDateTime);
-
-    $date = $buf[0];
-
-    $newTime = $buf[1];
-
-    //時間を見て調べる
-
-    try{
-
-        $pdo = connectDataBase();
-
-        $stmt = $pdo->prepare("select hit, atmpt, time from record where userid = :userID and date=:date");
-
-        $stmt->bindParam(':userID', $userID, PDO::PARAM_STR);
-
-        $stmt->bindParam(':date', $date, PDO::PARAM_STR);
-
-        $stmt->execute();
-
-    } catch (PDOException $e) {
-
-        echo "PDO Error:".$e->getMessage()."\n";
-
-        die();
-
-    }
-
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-        //登録済みだった場合時間を比較
-
-        $buf = explode(":", $newTime);
-
-        error_log(var_export($buf, true));
-
-        $newTime = (int)$buf[0]*10000 + (int)$buf[1]*100 + (int)$buf[2]*1;
-
-        $buf = explode(":", $result['time']);
-
-        $time = (int)$buf[0]*10000 + (int)$buf[1]*100 + (int)$buf[2]*1;
-
-        //新しいデータなら更新、古ければ無視
-
-        if ($newTime > $time) {
-
-            return array("mode" => "update", "hit" => $result['hit'], "atmpt" => $result['atmpt']);
-
-        } else {
-
-            return array("mode" => "old", "hit" => 0, "atmpt" => 0);
-
-        }
-
-    } else {
-
-        //登録されていなかった場合レコードを登録
-
-        return array("mode" => "insert", "hit" => 0, "atmpt" => 0);
-
-    }
-
-}
-
-
-
-/*ユーザ入力が分数の形かつ分母が大きいかを調べる*/
-
-function isFraction($userMessage): bool
-
-{
-
-    if ( preg_match("#^\d+/\d+$#", $userMessage, $matches) ) {
-
-        $numbers = explode("/", $userMessage);
-
-        if ($numbers[0] <= $numbers[1]) {
-
-            return true;
-
-        }
-
-    }
-
-    return false;
-
-}
-
-
-
-/*ユーザメッセージに応じて対応のモードを返す*/
-
-function replyMode($userMessage): string
-
-{
-
-    if (isFraction($userMessage)) {
-
-        return "insert_request";
-
-    } else if ($userMessage == "こんにちは") {
-
-        return "hello";
-
-    } else if ($userMessage == "使い方") {
-
-        return "explain";
-
-    } else {
-
-        return "copy";
-
-    }
-
-}
-
-
-
-/*文字列の配列を引数として送信用メッセージ(LINE用)を返す*/
-
-function buildMessages($textMessages): \LINE\LINEBot\MessageBuilder\MultiMessageBuilder
-
-{
-
-    $replyMessage = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-
-    foreach($textMessages as $message){
-
-        $a = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
-
-        $replyMessage->add($a);
-
-    }
-
-    return $replyMessage;
-
-}
+return 0;
