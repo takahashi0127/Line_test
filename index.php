@@ -260,5 +260,20 @@ $response = $bot->replyMessage($event->replyToken, $textMessageBuilder);
 error_log(var_export($response,true));
 
 
+function isPostback($event)
+
+{
+
+    if ($event->type == "postback") {
+
+        return true;
+
+    } else {
+
+        return false;
+
+    }
+
+}
 
 return 0;
