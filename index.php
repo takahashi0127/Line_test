@@ -158,18 +158,40 @@ foreach ($events as $event) {
                 //Confirmテンプレート
                 $confirm0 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage0, [$yes_post0, $no_post0]);
                 // Confirmメッセージを作る
-                $replyMessage0 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm0);
-                $response0 = $bot->replyMessage($event->replyToken, $replyMessage0);
-
+//                $replyMessage0 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm0);
+//                $response0 = $bot->replyMessage($event->replyToken, $replyMessage0);
 
 
 //-------------------------------------key[1]------------------------------------------------------------------------------------------------------------
+                $confirmMessage1 = $keydata[1]."の状態を選択してください";
+                //はい ボタン
+                $yes_post1 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "I");
+                //いいえボタン
+                $no_post1 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "O");
+
+                //Confirmテンプレート
+                $confirm1 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage1, [$yes_post1, $no_post1]);
+                // Confirmメッセージを作る
+//                $replyMessage1 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm1);
+//                $response1 = $bot->replyMessage($event->replyToken, $replyMessage1);
 
 
+//-------------------------------------key[2]------------------------------------------------------------------------------------------------------------
+                $confirmMessage2 = $keydata[2]."の状態を選択してください";
+                //はい ボタン
+                $yes_post2 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "I");
+                //いいえボタン
+                $no_post2 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "O");
 
+                //Confirmテンプレート
+                $confirm2 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage2, [$yes_post2, $no_post2]);
+                // Confirmメッセージを作る
+ //               $replyMessage2 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm2);
+//                $response2 = $bot->replyMessage($event->replyToken, $replyMessage2);
 
-
-
+                //複数同時表示
+                $replyMessage = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder($confirm0,$confirm1,$confirm2,);
+                $response = $bot->replyMessage($event->replyToken, $replyMessage);
 
             break;
 
