@@ -206,11 +206,11 @@ foreach ($events as $event) {
             $data2 = file_get_contents('keyname2.txt', true);
             $data3 = file_get_contents('keyname3.txt', true);
             $conflock1 = file_get_contents('lock1.txt', true);
- //           $conflock2 = file_get_contents('lock2.txt', true);
- //           $conflock3 = file_get_contents('lock3.txt', true);
+            $conflock2 = file_get_contents('lock2.txt', true);
+            $conflock3 = file_get_contents('lock3.txt', true);
 
 
-            $checkMessage = "現在の施錠状況です\n「".$data1."」:".$conflock1;
+            $checkMessage = "現在の施錠状況です\n「".$data1."」:".$conflock1.$data2."」:".$conflock2.$data3."」:".$conflock3;
             $checkMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkMessage);
             $response = $bot->replyMessage($event->replyToken, $checkMessageBuilder);
 
@@ -271,7 +271,7 @@ foreach ($events as $event) {
             $data2 = file_get_contents('keyname2.txt', true);
             $data3 = file_get_contents('keyname3.txt', true);
             file_put_contents('lock1.txt', "Unlock");
-            $button1 = $data1."→施錠";
+            $button1 = $data1."→解錠";
             $situMessageBuilder1 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button1);
             $response = $bot->replyMessage($event->replyToken, $situMessageBuilder1);
         break;
@@ -281,7 +281,7 @@ foreach ($events as $event) {
             $data2 = file_get_contents('keyname2.txt', true);
             $data3 = file_get_contents('keyname3.txt', true);
             file_put_contents('lock2.txt', "Unlock");
-            $button2 = $data2."→施錠";
+            $button2 = $data2."→解錠";
             $situMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button2);
             $response = $bot->replyMessage($event->replyToken, $situMessageBuilder2);
         break;
@@ -291,7 +291,7 @@ foreach ($events as $event) {
             $data2 = file_get_contents('keyname2.txt', true);
             $data3 = file_get_contents('keyname3.txt', true);
             file_put_contents('lock3.txt', "Unlock");
-            $button3 = $data3."→施錠";
+            $button3 = $data3."→解錠";
             $situMessageBuilder3 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button3);
             $response = $bot->replyMessage($event->replyToken, $situMessageBuilder3);
         break;
