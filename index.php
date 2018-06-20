@@ -158,7 +158,8 @@ foreach ($events as $event) {
                 //Confirmテンプレート
                 $confirm0 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage0, [$yes_post0, $no_post0]);
                 // Confirmメッセージを作る
-//                $replyMessage0 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm0);
+                $reskey0 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm0);
+                $repkeyMessage -> add($reskey0);
 //                $response0 = $bot->replyMessage($event->replyToken, $replyMessage0);
 
 
@@ -172,7 +173,8 @@ foreach ($events as $event) {
                 //Confirmテンプレート
                 $confirm1 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage1, [$yes_post1, $no_post1]);
                 // Confirmメッセージを作る
-//                $replyMessage1 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm1);
+                $reskey1 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm1);
+                $repkeyMessage -> add($reskey1);
 //                $response1 = $bot->replyMessage($event->replyToken, $replyMessage1);
 
 
@@ -186,12 +188,12 @@ foreach ($events as $event) {
                 //Confirmテンプレート
                 $confirm2 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage2, [$yes_post2, $no_post2]);
                 // Confirmメッセージを作る
- //               $replyMessage2 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm2);
+                $reskey2 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm2);
+                $repkeyMessage -> add($reskey2);
 //                $response2 = $bot->replyMessage($event->replyToken, $replyMessage2);
 
                 //複数同時表示
-                $replyMessage = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder($confirm0,$confirm1,$confirm2,);
-                $response = $bot->replyMessage($event->replyToken, $replyMessage);
+                $response = $bot->replyMessage($event->replyToken, $repkeyMessage);
 
             break;
 
