@@ -146,6 +146,7 @@ foreach ($events as $event) {
             case '施錠確認':
                 $keys = file_get_contents('keyname1.txt', true)."/".file_get_contents('keyname2.txt', true)."/".file_get_contents('keyname3.txt', true);
                 $keydata = explode("/", $keys);
+                $repkeyMessage = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
 
 //-------------------------------------key[0]------------------------------------------------------------------------------------------------------------
@@ -158,8 +159,8 @@ foreach ($events as $event) {
                 //Confirmテンプレート
                 $confirm0 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage0, [$yes_post0, $no_post0]);
                 // Confirmメッセージを作る
-                $reskey0 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm0);
-                $repkeyMessage -> add($reskey0);
+                $repkey0 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm0);
+                $repkeyMessage->add($repkey0);
 //                $response0 = $bot->replyMessage($event->replyToken, $replyMessage0);
 
 
@@ -173,8 +174,8 @@ foreach ($events as $event) {
                 //Confirmテンプレート
                 $confirm1 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage1, [$yes_post1, $no_post1]);
                 // Confirmメッセージを作る
-                $reskey1 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm1);
-                $repkeyMessage -> add($reskey1);
+                $repkey1 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm1);
+                $repkeyMessage->add($repkey1);
 //                $response1 = $bot->replyMessage($event->replyToken, $replyMessage1);
 
 
@@ -188,8 +189,8 @@ foreach ($events as $event) {
                 //Confirmテンプレート
                 $confirm2 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage2, [$yes_post2, $no_post2]);
                 // Confirmメッセージを作る
-                $reskey2 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm2);
-                $repkeyMessage -> add($reskey2);
+                $repkey2 = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm2);
+                $repkeyMessage->add($repkey2);
 //                $response2 = $bot->replyMessage($event->replyToken, $replyMessage2);
 
                 //複数同時表示
