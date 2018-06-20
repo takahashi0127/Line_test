@@ -146,22 +146,17 @@ foreach ($events as $event) {
             case '施錠確認':
                 $keys = file_get_contents('keyname1.txt', true)."/".file_get_contents('keyname2.txt', true)."/".file_get_contents('keyname3.txt', true);
                 $keydata = explode("/", $keys);
-//                $data[0] = file_get_contents('keyname1.txt', true);
-//                $data[1] = file_get_contents('keyname2.txt', true);
-//                $data[2] = file_get_contents('keyname3.txt', true);
-      //          $keys = explode("/", $datatest);
-      //          $now = date('Y-m-d H:i:s');
                 $confirmMessage = $keydata[0]."の状態を選択してください";
 
                 //はい ボタン
                 $yes_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "I");
                 //いいえボタン
-                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", $keydata[0]."O");
+                $no_post = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "O");
 
                 //Confirmテンプレート
                 $confirm = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage, [$yes_post, $no_post]);
                 // Confirmメッセージを作る
-                $replyMessage = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("メッセージ", $confirm);
+                $replyMessage = new LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("施錠確認中", $confirm);
                 $response = $bot->replyMessage($event->replyToken, $replyMessage);
 
             break;
@@ -200,10 +195,10 @@ foreach ($events as $event) {
     //    }//else(text == reg以外)
     }//elseif(text)
 
-    else if (isPostback($event)){//ボタンが押されたとき
-        $botton = $event->postback->data;
-        $situation = substr($button, -1);
-        $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($situation);
+    else if ($event->postback->data == "I"){//ボタンが押されたとき
+        $button = $event->postback->data;
+  //      $situation = substr($button, -1);
+        $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button);
         $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
 /*        switch ($situation){
 
