@@ -199,7 +199,7 @@ foreach ($events as $event) {
         $data1 = file_get_contents('keyname1.txt', true);
         $data2 = file_get_contents('keyname2.txt', true);
         $data3 = file_get_contents('keyname3.txt', true);
-        file_put_contents(lock1.txt, "Lock");
+        file_put_contents('lock1.txt', "Lock");
         $button = $data1."→施錠";
         $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button);
         $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
