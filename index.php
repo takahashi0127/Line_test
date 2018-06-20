@@ -203,8 +203,9 @@ foreach ($events as $event) {
     else if (!empty($event->message->type->postback->data)){//ボタンが押されたとき
         $botton = $event->postback->data;
         $situation = substr($event->postback->data, -1);
-
-        switch ($situation){
+        $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($situation);
+        $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
+/*        switch ($situation){
 
         case I:
             $data1 = file_get_contents('keyname1.txt', true);
@@ -228,7 +229,7 @@ foreach ($events as $event) {
             $response = $bot->replyMessage($event->replyToken, $lockMessageBuilder);
         
 
-        }//switch
+        }//switch*/
     }
 
 /*    else if ($event->message->text != "ヘルプ"){
