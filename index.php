@@ -196,8 +196,10 @@ foreach ($events as $event) {
     }//elseif(text)
 
     else if ($event->postback->data == "I"){//ボタンが押されたとき
-        $button = $event->postback->data;
-  //      $situation = substr($button, -1);
+        $data1 = file_get_contents('keyname1.txt', true);
+        $data2 = file_get_contents('keyname2.txt', true);
+        $data3 = file_get_contents('keyname3.txt', true);
+        $button = $data1."→施錠";
         $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button);
         $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
 /*        switch ($situation){
