@@ -202,7 +202,7 @@ foreach ($events as $event) {
 
     else if (isPostback($event)){//ボタンが押されたとき
         $botton = $event->postback->data;
-        $situation = substr($button);
+        $situation = substr($button, -1);
         $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($situation);
         $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
 /*        switch ($situation){
