@@ -152,9 +152,9 @@ foreach ($events as $event) {
 //-------------------------------------key[0]------------------------------------------------------------------------------------------------------------
                 $confirmMessage0 = $keydata[0]."の状態を選択してください";
                 //はい ボタン
-                $yes_post0 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "I");
+                $yes_post0 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "1I");
                 //いいえボタン
-                $no_post0 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "O");
+                $no_post0 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "1O");
 
                 //Confirmテンプレート
                 $confirm0 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage0, [$yes_post0, $no_post0]);
@@ -167,9 +167,9 @@ foreach ($events as $event) {
 //-------------------------------------key[1]------------------------------------------------------------------------------------------------------------
                 $confirmMessage1 = $keydata[1]."の状態を選択してください";
                 //はい ボタン
-                $yes_post1 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "I");
+                $yes_post1 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "2I");
                 //いいえボタン
-                $no_post1 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "O");
+                $no_post1 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "2O");
 
                 //Confirmテンプレート
                 $confirm1 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage1, [$yes_post1, $no_post1]);
@@ -182,9 +182,9 @@ foreach ($events as $event) {
 //-------------------------------------key[2]------------------------------------------------------------------------------------------------------------
                 $confirmMessage2 = $keydata[2]."の状態を選択してください";
                 //はい ボタン
-                $yes_post2 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "I");
+                $yes_post2 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("施錠", "3I");
                 //いいえボタン
-                $no_post2 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "O");
+                $no_post2 = new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("解錠", "3O");
 
                 //Confirmテンプレート
                 $confirm2 = new LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder($confirmMessage2, [$yes_post2, $no_post2]);
@@ -232,15 +232,75 @@ foreach ($events as $event) {
     //    }//else(text == reg以外)
     }//elseif(text)
 
-    else if ($event->postback->data == "I"){//ボタンが押されたとき
-        $data1 = file_get_contents('keyname1.txt', true);
-        $data2 = file_get_contents('keyname2.txt', true);
-        $data3 = file_get_contents('keyname3.txt', true);
-        file_put_contents('lock1.txt', "Lock");
-        $button = $data1."→施錠";
-        $etcMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button);
-        $response = $bot->replyMessage($event->replyToken, $etcMessageBuilder);
-/*        switch ($situation){
+    else if (!empty($event->postback->data)){//ボタンが押されたとき
+        $action = $event->postback->data;
+
+        switch ($action){
+        case '1I':
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            file_put_contents('lock1.txt', "Lock");
+            $button1 = $data1."→施錠";
+            $situMessageBuilder1 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button1);
+            $response = $bot->replyMessage($event->replyToken, $situMessageBuilder1);
+        break;
+
+        case '2I':
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            file_put_contents('lock2.txt', "Lock");
+            $button2 = $data2."→施錠";
+            $situMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button2);
+            $response = $bot->replyMessage($event->replyToken, $situMessageBuilder2);
+        break;
+
+        case '3I':
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            file_put_contents('lock3.txt', "Lock");
+            $button3 = $data3."→施錠";
+            $situMessageBuilder3 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button3);
+            $response = $bot->replyMessage($event->replyToken, $situMessageBuilder3);
+        break;
+
+        case '1O':
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            file_put_contents('lock1.txt', "Unlock");
+            $button1 = $data1."→施錠";
+            $situMessageBuilder1 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button1);
+            $response = $bot->replyMessage($event->replyToken, $situMessageBuilder1);
+        break;
+
+        case '2O':
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            file_put_contents('lock2.txt', "Unlock");
+            $button2 = $data2."→施錠";
+            $situMessageBuilder2 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button2);
+            $response = $bot->replyMessage($event->replyToken, $situMessageBuilder2);
+        break;
+
+        case '3O':
+            $data1 = file_get_contents('keyname1.txt', true);
+            $data2 = file_get_contents('keyname2.txt', true);
+            $data3 = file_get_contents('keyname3.txt', true);
+            file_put_contents('lock3.txt', "Unlock");
+            $button3 = $data3."→施錠";
+            $situMessageBuilder3 = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($button3);
+            $response = $bot->replyMessage($event->replyToken, $situMessageBuilder3);
+        break;
+
+        default:
+        return;
+        }//switch
+    }//elseif
+/*
 
         case I:
             $data1 = file_get_contents('keyname1.txt', true);
@@ -265,7 +325,6 @@ foreach ($events as $event) {
         
 
         }//switch*/
-    }
 
 /*    else if ($event->message->text != "ヘルプ"){
         $replyMessage = $event->message->text;
